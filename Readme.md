@@ -1,5 +1,9 @@
 # Todo App Project
 
+[![Node.js](https://img.shields.io/badge/Node.js-18-blue)](https://nodejs.org/)
+[![React](https://img.shields.io/badge/React-19.1.1-blue)](https://reactjs.org/)
+[![Docker](https://img.shields.io/badge/Docker-Compose-blue)](https://www.docker.com/)
+
 Application for easily adding and deleting tasks, with a light/dark mode toggle.
 
 ![Todo App Project preview image](./project-preview.jpeg)
