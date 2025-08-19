@@ -22,28 +22,30 @@ Dive into the world of productivity and design with **Todo App**. This project e
 
 ---
 
-## ✨ Funcionalidades principales
+## ✨ Main Features
 
-- Agregar nuevas tareas desde la interfaz.
-- Eliminar tareas individualmente con botón “X”.
-- Marcar tareas como completadas con checkbox y contador de progreso.
-- Alternar entre modo claro y oscuro con animación.
-- **Login de usuario** para que cada persona tenga su lista personalizada.
-- **Recordatorios sincronizados con Google Drive**.
-
----
-
-## 🌱 “Mi cosecha”
-
-- Los usuarios se registran o inician sesión.
-- Las tareas se almacenan y recuperan desde el backend Node.js.
-- Los recordatorios se vinculan con Google Drive, permitiendo recibir alertas o acceder a tus tareas desde cualquier dispositivo.
+- Add new tasks from the interface.
+- Delete tasks individually using the "X" button.
+- Mark tasks as completed with checkboxes and a progress counter.
+- Toggle between light and dark mode with animation.
+- **User login** so each person has their personalized task list.
+- **Reminders synced with Google Drive**.
 
 ---
 
-## 🛠 Instalación
+## 🌱 “My Harvest”
 
-Antes de ejecutar el proyecto, asegúrate de instalar las dependencias de Node.js tanto en el backend como en el frontend.
+- Users can register or log in.
+- Tasks are stored and retrieved from the Node.js backend.
+- Reminders are linked to Google Drive, allowing users to receive alerts or access their tasks from any device.
+
+---
+
+## 🛠 Installation
+
+Before running the project, make sure to install Node.js dependencies for both the backend and frontend.
+
+---
 
 ### Backend
 
