@@ -30,14 +30,6 @@ El proyecto combina diseño limpio y usabilidad, ideal para practicar React, Nod
 
 ---
 
-## 🚀 Instalación y ejecución
-
-1. Clonar el repositorio:
-```bash
-git clone https://github.com/tu-usuario/todo-app.git
-cd todo-app
-docker-compose up --build
-
 ## ✨ Funcionalidades principales
 
 - Agregar nuevas tareas desde la interfaz.  
@@ -54,3 +46,14 @@ docker-compose up --build
 - Los usuarios se registran o inician sesión.  
 - Las tareas se almacenan y recuperan desde el backend Node.js.  
 - Los recordatorios se vinculan con Google Drive, permitiendo recibir alertas o acceder a tus tareas desde cualquier dispositivo.  
+
+---
+
+## 🚀 Instalación y ejecución
+
+1. Clonar el repositorio:
+```bash
+git clone https://github.com/tu-usuario/todo-app.git
+cd todo-app
+docker-compose up --build
+
