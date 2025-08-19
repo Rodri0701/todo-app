@@ -47,6 +47,38 @@ Before running the project, make sure to install Node.js dependencies for both t
 
 ---
 
+## 🐳 Docker Setup
+
+You can run the project using Docker to avoid installing Node.js and dependencies manually. Follow these steps:
+
+### Build the Docker containers
+
+From the root project directory, run:
+
+```bash
+docker-compose build
+
+```
+---
+## Start the containers
+After building, start the containers:
+
+```bash
+docker-compose up
+
+```
+
+---
+## Stop the containers
+To stop and remove the containers, use:
+
+```bash
+docker-compose down
+
+```
+
+---
+
 ### Backend
 
 ```bash
