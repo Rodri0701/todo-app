@@ -1,4 +1,3 @@
-import './App.css';
 import Footer from './components/Footer.tsx';
 import Navbar from './components/Navbar.tsx';
 import CardLeft from './components/CardLeft.tsx';

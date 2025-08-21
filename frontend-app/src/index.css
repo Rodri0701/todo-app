@@ -51,7 +51,7 @@ code {
 
 .parte-izquierda {
   flex: 1; /* Mantiene el ancho igual al de .parte-derecha */
-  background-color: #ffffff; /* Fondo blanco para el efecto de tarjeta */
+  background-color: #770d0d; /* Fondo blanco para el efecto de tarjeta */
   border: 1px solid #e5e7eb; /* Borde sutil (gris claro) */
   border-radius: 1rem; /* Esquinas redondeadas */
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.08); /* Sombreado exterior suave */
@@ -78,6 +78,10 @@ code {
   background-clip: text; /* Aplica el degradado al texto */
   color: transparent; /* Hace el texto transparente para mostrar el degradado */
   margin: 0 0 1rem 0; /* Margen inferior para separar del contenido */
+}
+.parte-izquierda.compressed {
+  flex: none;
+  width: 300px; /* Cambia este valor, por ejemplo, 250px, 350px */
 }
 
 @keyframes slideFromLeft {
@@ -107,6 +111,10 @@ code {
   justify-content: center; /* Centra contenido verticalmente */
 }
 
+.parte-derecha.expanded {
+  flex: none;
+  width: 600px; /* Cambia este valor, por ejemplo, 500px, 700px */
+}
 .parte-derecha:hover {
   box-shadow: inset 0 7px 14px rgba(0, 0, 0, 0.15), inset 0 3px 6px rgba(0, 0, 0, 0.1); /* Sombra interior más intensa */
 }
