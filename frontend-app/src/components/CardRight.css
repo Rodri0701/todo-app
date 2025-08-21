@@ -1,109 +1,103 @@
 * {
-  box-sizing: border-box; /* Evita desbordes por padding o bordes */
+  box-sizing: border-box;
 }
 
 .Principal {
   display: flex;
-  justify-content: space-between; /* Separa Izq y Der */
+  justify-content: space-between;
   width: 100%;
-  gap: 1rem; /* Espacio entre las tarjetas */
-  align-items: stretch; /* Hace que Izq y Der tengan la misma altura */
+  gap: 1rem;
+  align-items: stretch;
+  height: 100%; /* Se adapta a la altura de .parte-derecha */
 }
 
 .Izq {
-  flex: 1; /* Ocupa el 50% del ancho */
-  background-color: #ffffff; /* Fondo blanco como .parte-izquierda */
-  border: 1px solid #e5e7eb; /* Borde gris claro */
-  border-radius: 1rem; /* Esquinas redondeadas */
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.08); /* Sombreado exterior */
-  padding: 1.5rem; /* Espaciado interno */
+  flex: 1;
+  background-color: #ffffff;
+  border: 1px solid #e5e7eb;
+  border-radius: 1rem;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.08);
+  padding: 1.5rem;
   text-align: center;
-  transition: transform 0.2s, box-shadow 0.2s; /* Animación para hover */
-  animation: slideFromLeft 0.5s ease-out forwards; /* Animación de entrada */
-  max-width: 100%; /* Evita desbordamiento */
+  transition: transform 0.2s, box-shadow 0.2s;
+  animation: slideFromLeft 0.5s ease-out forwards;
+  max-width: 100%;
   display: flex;
-  flex-direction: column; /* Alinea contenido en columna */
-  justify-content: center; /* Centra contenido verticalmente */
+  flex-direction: column;
+  justify-content: center;
 }
 
 .Izq:hover {
-  transform: translateY(-2px); /* Elevación al pasar el mouse */
-  box-shadow: 0 7px 14px rgba(0, 0, 0, 0.1), 0 3px 6px rgba(0, 0, 0, 0.08); /* Sombra más intensa */
-}
-
-.Izq h2 {
-  font-size: 1.5rem; /* Tamaño del texto */
-  font-weight: 600; /* Peso de la fuente */
-  background: linear-gradient(45deg, #0F0E0E, #EF1A1A); /* Degradado negro a rojo, como .parte-izquierda */
-  -webkit-background-clip: text; /* Aplica degradado al texto */
-  background-clip: text;
-  color: transparent; /* Muestra el degradado */
-  margin: 0 0 1rem 0; /* Margen inferior */
+  transform: translateY(-2px);
+  box-shadow: 0 7px 14px rgba(0, 0, 0, 0.1), 0 3px 6px rgba(0, 0, 0, 0.08);
 }
 
 .Der {
-  flex: 1; /* Ocupa el 50% del ancho */
-  border-radius: 1rem; /* Esquinas redondeadas */
-  padding: 1.5rem; /* Espaciado interno */
+  flex: 1;
+  background: linear-gradient(135deg, #ffffff, #b7e0d2);
+  border: 1px solid #e5e7eb;
+  border-radius: 1rem;
+  box-shadow: inset 0 4px 6px rgba(0, 0, 0, 0.1), inset 0 1px 3px rgba(0, 0, 0, 0.08);
+  padding: 1.5rem;
   text-align: center;
-  transition: box-shadow 0.2s; /* Animación para hover */
-  animation: slideFromRight 0.5s ease-out forwards; /* Animación de entrada */
-  max-width: 100%; /* Evita desbordamiento */
+  transition: box-shadow 0.2s;
+  animation: slideFromRight 0.5s ease-out forwards;
+  max-width: 100%;
   display: flex;
-  flex-direction: column; /* Alinea contenido en columna */
-  justify-content: center; /* Centra contenido verticalmente */
+  flex-direction: column;
+  justify-content: center;
 }
 
 .Der:hover {
-  box-shadow: inset 0 7px 14px rgba(0, 0, 0, 0.15), inset 0 3px 6px rgba(0, 0, 0, 0.1); /* Sombra interior más intensa */
+  box-shadow: inset 0 7px 14px rgba(0, 0, 0, 0.15), inset 0 3px 6px rgba(0, 0, 0, 0.1);
 }
 
 .Der h2 {
-  font-size: 1.5rem; /* Tamaño del texto */
-  font-weight: 600; /* Peso de la fuente */
-   background: linear-gradient(45deg, #0F0E0E, #EF1A1A); /* Degradado de negro a rojo */
-  -webkit-background-clip: text; /* Aplica degradado al texto */
+  font-size: 1.5rem;
+  font-weight: 600;
+background: linear-gradient(45deg, #0F0E0E, #EF1A1A);
+  -webkit-background-clip: text;
   background-clip: text;
-  color: transparent; /* Muestra el degradado */
-  margin: 0 0 1rem 0; /* Margen inferior */
+  color: transparent;
+  margin: 0 0 1rem 0;
 }
 
 @keyframes slideFromLeft {
   0% {
     opacity: 0;
-    transform: translateX(-20px); /* Comienza desde la izquierda */
+    transform: translateX(-20px);
   }
   100% {
     opacity: 1;
-    transform: translateX(0); /* Posición normal */
+    transform: translateX(0);
   }
 }
 
 @keyframes slideFromRight {
   0% {
     opacity: 0;
-    transform: translateX(20px); /* Comienza desde la derecha */
+    transform: translateX(20px);
   }
   100% {
     opacity: 1;
-    transform: translateX(0); /* Posición normal */
+    transform: translateX(0);
   }
 }
 
-/* Responsividad para pantallas pequeñas */
+/* Responsividad */
 @media (max-width: 767px) {
   .Principal {
-    flex-direction: column; /* Apila Izq y Der verticalmente */
-    align-items: center; /* Centra horizontalmente */
-    min-height: auto; /* Ajusta la altura al contenido */
+    flex-direction: column;
+    align-items: center;
+    min-height: auto;
   }
 
   .Izq,
   .Der {
     flex: none;
-    width: 100%; /* Ocupa todo el ancho */
-    min-height: auto; /* Ajusta la altura al contenido */
-    max-height: 50vh; /* Limita la altura máxima */
-    overflow: auto; /* Permite desplazamiento si hay mucho contenido */
+    width: 100%;
+    min-height: auto;
+    max-height: 50vh;
+    overflow: auto;
   }
 }

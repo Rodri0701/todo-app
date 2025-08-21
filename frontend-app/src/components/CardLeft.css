@@ -1,9 +1,24 @@
-/* src/components/CardLeft.css */
 .card-left {
-  background-color: #ffffff; /* claro */
+  background-color: #ffffff;
   padding: 1.5rem;
   border-radius: 0.75rem;
- 
   text-align: center;
   margin: 1rem;
+  transition: flex 0.3s ease; /* Transición suave para el cambio de tamaño */
+}
+
+.card-left.compressed {
+  flex: 0.7; /* Reduce el ancho cuando el formulario está visible */
+}
+
+@media (max-width: 768px) {
+  .card-left {
+    margin: 0.5rem;
+    padding: 1rem;
+  }
+
+  .card-left.compressed {
+    flex: none;
+    width: 100%;
+  }
 }
