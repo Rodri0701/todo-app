@@ -1,3 +1,7 @@
+* {
+  box-sizing: border-box;
+}
+
 body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
@@ -5,9 +9,142 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  background-color: #f4f4f4; /* Color neutro de fondo */
 }
 
 code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace;
+}
+
+.divPrincipal {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.mainmain {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start; /* Las tarjetas se alinean al top */
+  padding: 2rem;
+}
+
+.divcentral {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  gap: 1rem;
+  min-height: 100%; /* Cambiado de 100vh a 100% para usar la altura del padre */
+  align-items: stretch; /* Hace que los hijos se estiren para llenar la altura del contenedor */
+}
+
+.parte-izquierda,
+.parte-derecha {
+  flex: 1; /* Cada parte ocupa el mismo espacio horizontal (50%) */
+  padding: 1.5rem; /* Espaciado interno */
+  display: flex; /* Convierte cada parte en un contenedor flex para alinear contenido */
+  flex-direction: column; /* Alinea el contenido interno en columna */
+  justify-content: center; /* Centra el contenido verticalmente */
+  max-width: 100%; /* Evita desbordamiento horizontal */
+}
+
+.parte-izquierda {
+  flex: 1; /* Mantiene el ancho igual al de .parte-derecha */
+  background-color: #ffffff; /* Fondo blanco para el efecto de tarjeta */
+  border: 1px solid #e5e7eb; /* Borde sutil (gris claro) */
+  border-radius: 1rem; /* Esquinas redondeadas */
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.08); /* Sombreado exterior suave */
+  padding: 1.5rem; /* Espaciado interno */
+  text-align: center;
+  transition: transform 0.2s, box-shadow 0.2s; /* Animación suave para interacción */
+  animation: slideFromLeft 0.5s ease-out forwards; /* Animación de entrada */
+  max-width: 100%; /* Evita desbordamiento horizontal */
+  display: flex; /* Convierte en contenedor flex */
+  flex-direction: column; /* Alinea contenido en columna */
+  justify-content: center; /* Centra contenido verticalmente */
+}
+
+.parte-izquierda:hover {
+  transform: translateY(-2px); /* Elevación al pasar el mouse */
+  box-shadow: 0 7px 14px rgba(0, 0, 0, 0.1), 0 3px 6px rgba(0, 0, 0, 0.08); /* Sombra más intensa */
+}
+
+.parte-izquierda h2 {
+  font-size: 1.5rem; /* Tamaño del texto */
+  font-weight: 600; /* Peso de la fuente */
+  background: linear-gradient(45deg, #0F0E0E, #EF1A1A); /* Degradado de negro a rojo */
+  -webkit-background-clip: text; /* Aplica el degradado al texto (para navegadores WebKit) */
+  background-clip: text; /* Aplica el degradado al texto */
+  color: transparent; /* Hace el texto transparente para mostrar el degradado */
+  margin: 0 0 1rem 0; /* Margen inferior para separar del contenido */
+}
+
+@keyframes slideFromLeft {
+  0% {
+    opacity: 0;
+    transform: translateX(-20px); /* Comienza desde la izquierda */
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0); /* Termina en posición normal */
+  }
+}
+
+.parte-derecha {
+  flex: 1; /* Mantiene el ancho igual al de .parte-izquierda */
+  background: linear-gradient(135deg, #EBCBE7, #857373); /* Fondo degradado de rosa claro a oscuro */
+  border: 1px solid #e5e7eb; /* Borde sutil (gris claro) */
+  border-radius: 1rem; /* Esquinas redondeadas */
+  box-shadow: inset 0 4px 6px rgba(0, 0, 0, 0.1), inset 0 1px 3px rgba(0, 0, 0, 0.08); /* Sombreado interior */
+  padding: 1.5rem; /* Espaciado interno */
+  text-align: center;
+  transition: box-shadow 0.2s; /* Animación suave para interacción */
+  animation: slideFromRight 0.5s ease-out forwards; /* Animación de entrada */
+  max-width: 100%; /* Evita desbordamiento horizontal */
+  display: flex; /* Convierte en contenedor flex */
+  flex-direction: column; /* Alinea contenido en columna */
+  justify-content: center; /* Centra contenido verticalmente */
+}
+
+.parte-derecha:hover {
+  box-shadow: inset 0 7px 14px rgba(0, 0, 0, 0.15), inset 0 3px 6px rgba(0, 0, 0, 0.1); /* Sombra interior más intensa */
+}
+
+.parte-derecha h2 {
+  font-size: 1.5rem; /* Tamaño del texto */
+  font-weight: 600; /* Peso de la fuente */
+  background: linear-gradient(45deg, #10B981, #059669); /* Degradado de verde claro a verde más oscuro */
+  -webkit-background-clip: text; /* Aplica el degradado al texto (para navegadores WebKit) */
+  background-clip: text; /* Aplica el degradado al texto */
+  color: transparent; /* Hace el texto transparente para mostrar el degradado */
+  margin: 0 0 1rem 0; /* Margen inferior para separar del contenido */
+}
+
+@keyframes slideFromRight {
+  0% {
+    opacity: 0;
+    transform: translateX(20px); /* Comienza desde la derecha */
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0); /* Termina en posición normal */
+  }
+}
+
+@media (max-width: 768px) {
+  .divcentral {
+    flex-direction: column;
+    min-height: auto; /* Evita que el contenedor sea demasiado alto */
+    align-items: center; /* Centra las tarjetas horizontalmente */
+  }
+
+  .parte-izquierda,
+  .parte-derecha {
+    flex: none;
+    width: 100%;
+    min-height: auto; /* Deja que la altura se ajuste al contenido */
+    max-height: 50vh; /* Limita la altura máxima para evitar desbordamiento */
+    overflow: auto; /* Permite desplazamiento si el contenido es demasiado grande */
+  }
 }

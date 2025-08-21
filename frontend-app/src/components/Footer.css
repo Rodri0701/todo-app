@@ -1,0 +1,82 @@
+footer {
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.9), rgba(243, 244, 246, 0.9)); /* Fondo degradado sutil */
+  border: 1px solid #4B5563; /* gray-600 */
+  border-radius: 1rem; /* Esquinas redondeadas */
+  color: black;
+  padding: 1.5rem 2rem; /* Más espacio x y y */
+  margin: 1rem auto; /* Margen vertical para separación */
+  display: flex;
+  flex-direction: column;
+  justify-content: center; /* Centra verticalmente */
+  align-items: center; /* Centra horizontalmente */
+  width: 100%; /* Ocupa todo el ancho */
+  max-width: 1200px; /* Limita el ancho máximo para pantallas grandes */
+  box-sizing: border-box;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.08); /* Sombreado exterior como .parte-izquierda */
+  min-height: 120px; /* Altura mínima */
+  transition: box-shadow 0.2s;
+}
+
+footer:hover {
+  box-shadow: 0 7px 14px rgba(0, 0, 0, 0.1), 0 3px 6px rgba(0, 0, 0, 0.08); /* Sombra más intensa al hover */
+}
+
+.footer-top {
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* Centra horizontalmente */
+  justify-content: center; /* Centra verticalmente */
+  gap: 1rem;
+  width: 100%;
+}
+
+.footer-icons {
+  display: flex;
+  gap: 1.5rem; /* Separación entre íconos */
+  align-items: center;
+  justify-content: center; /* Centra los íconos */
+}
+
+.footer-icons img {
+  width: 28px; /* Tamaño de íconos */
+  height: 28px;
+  cursor: pointer;
+  transition: transform 0.2s, opacity 0.2s;
+}
+
+.footer-icons img:hover {
+  transform: scale(1.2);
+  opacity: 0.7;
+}
+
+.footer-bottom {
+  margin-top: 1rem;
+  text-align: center; /* Texto centrado */
+  font-size: 0.875rem;
+}
+
+.footer-bottom a {
+  color: #2563EB; /* Azul */
+  text-decoration: none;
+  transition: color 0.2s;
+}
+
+.footer-bottom a:hover {
+  color: #1D4ED8;
+}
+
+/* Responsive para pantallas pequeñas */
+@media (max-width: 767px) {
+  footer {
+    padding: 1rem; /* Menos padding en pantallas pequeñas */
+    min-height: 100px; /* Altura mínima más pequeña */
+  }
+
+  .footer-icons {
+    gap: 1rem; /* Menos separación entre íconos */
+  }
+
+  .footer-bottom {
+    font-size: 0.75rem; /* Texto más pequeño */
+  }
+}

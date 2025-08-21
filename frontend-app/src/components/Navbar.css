@@ -1,0 +1,66 @@
+/* src/components/Navbar.css */
+
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 2rem;
+  background-color: rgba(255, 255, 255, 0.8);
+  border-bottom: 1px solid #4B5563; /* gray-600 */
+}
+
+.navbar-logo h1 {
+  margin: 0;
+  font-size: 1.5rem;
+  font-weight: bold;
+
+  /* Gradiente de color */
+  background: linear-gradient(90deg, #706969, #E07272); /* colores segun figma */
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+
+  /* Opcional para Firefox */
+  background-clip: text;
+  color: transparent;
+}
+
+
+.navbar-links {
+  list-style: none;
+  display: flex;
+  gap: 1.5rem;
+  margin: 0;
+  padding: 0;
+}
+
+.navbar-links li a {
+  text-decoration: none;
+  color: #111;
+  font-weight: 500;
+  transition: color 0.2s;
+}
+
+.navbar-links li a:hover {
+  color: #2563EB; /* azul */
+}
+
+.navbar-actions .login-btn {
+  padding: 0.5rem 1rem;
+  background-color: #2563EB;
+  color: white;
+  border: none;
+  border-radius: 0.5rem;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.navbar-actions .login-btn:hover {
+  background-color: #1D4ED8;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .navbar-links {
+    display: none; /* ocultamos links en móviles, luego podemos agregar menú hamburguesa */
+  }
+}
