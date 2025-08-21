@@ -1,38 +1,150 @@
-.App {
-  text-align: center;
+* {
+  box-sizing: border-box;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background-color: #f4f4f4;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+.divPrincipal {
   display: flex;
   flex-direction: column;
-  align-items: center;
+  min-height: 100vh;
+}
+
+.mainmain {
+  flex: 1;
+  display: flex;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  align-items: flex-start;
+  padding: 2rem;
 }
 
-.App-link {
-  color: #61dafb;
+.divcentral {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  gap: 1rem;
+  min-height: 100%;
+  align-items: stretch;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
+.parte-izquierda,
+.parte-derecha {
+  flex: auto;
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  max-width: 100%;
+  transition: flex 0.3s ease;
+}
+
+.parte-izquierda {
+  background-color: #ffffff;
+  border: 1px solid #e5e7eb;
+  border-radius: 1rem;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.08);
+  animation: slideFromLeft 0.5s ease-out forwards;
+}
+
+.parte-izquierda.compressed {
+flex: 0.5
+}
+
+.parte-izquierda:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 7px 14px rgba(0, 0, 0, 0.1), 0 3px 6px rgba(0, 0, 0, 0.08);
+}
+
+.parte-izquierda h2 {
+  font-size: 1.5rem;
+  font-weight: 600;
+  background: linear-gradient(45deg, #0F0E0E, #EF1A1A);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  margin: 0 0 1rem 0;
+}
+
+.parte-derecha {
+background: linear-gradient(135deg, #ffffff, #b7e0d2);
+  border: 1px solid #e5e7eb;
+  border-radius: 1rem;
+  box-shadow: inset 0 4px 6px rgba(0, 0, 0, 0.1), inset 0 1px 3px rgba(0, 0, 0, 0.08);
+  animation: slideFromRight 0.5s ease-out forwards;
+}
+
+.parte-derecha.expanded {
+flex: 2;
+  
+}
+
+.parte-derecha:hover {
+  box-shadow: inset 0 7px 14px rgba(0, 0, 0, 0.15), inset 0 3px 6px rgba(0, 0, 0, 0.1);
+}
+
+.parte-derecha h2 {
+  font-size: 1.5rem;
+  font-weight: 600;
+  background: linear-gradient(45deg, #10B981, #059669);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  margin: 0 0 1rem 0;
+}
+
+@keyframes slideFromLeft {
+  0% {
+    opacity: 0;
+    transform: translateX(-20px);
   }
-  to {
-    transform: rotate(360deg);
+  100% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes slideFromRight {
+  0% {
+    opacity: 0;
+    transform: translateX(20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@media (max-width: 768px) {
+  .divcentral {
+    flex-direction: column;
+    min-height: auto;
+    align-items: center;
+  }
+
+  .parte-izquierda,
+  .parte-derecha {
+    flex: none;
+    width: 100%;
+    min-height: auto;
+    max-height: 50vh;
+    overflow: auto;
+  }
+
+  .parte-izquierda.compressed,
+  .parte-derecha.expanded {
+    flex: none;
+    width: 100%;
   }
 }

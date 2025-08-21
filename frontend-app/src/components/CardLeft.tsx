@@ -1,15 +1,19 @@
-// src/components/CardLeft.tsx
-import React from "react";
-import "./CardLeft.css";
+import React from 'react';
+import './CardLeft.css';
+import { useAppContext } from './AppContext.tsx';
 
-type CardLeftProps = {
+interface CardLeftProps {
   title: string;
-};
+}
 
-export default function CardLeft({ title }: CardLeftProps) {
+const CardLeft: React.FC<CardLeftProps> = ({ title }) => {
+  const { isLoginFormVisible } = useAppContext();
+
   return (
-    <div className="card-left">
+    <div className={`card-left ${isLoginFormVisible ? 'compressed' : ''}`}>
       <h2>{title}</h2>
     </div>
   );
-}
+};
+
+export default CardLeft;

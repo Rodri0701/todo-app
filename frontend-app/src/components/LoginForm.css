@@ -1,0 +1,97 @@
+* {
+  box-sizing: border-box;
+}
+
+.login-form {
+  background: linear-gradient(135deg, #ffffff, #b7e0d2);
+  border: 1px solid #e5e7eb; /* Borde gris claro */
+  border-radius: 0.75rem; /* Esquinas redondeadas */
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.08); /* Sombreado exterior */
+  padding: 1.5rem; /* Espaciado interno más grande para el formulario */
+  text-align: center;
+  animation: slideFromLeft 0.5s ease-out forwards; /* Animación como Task */
+  max-width: 100%;
+}
+
+.login-form h3 {
+  font-size: 1.25rem; /* Igual que Task */
+  font-weight: 600;
+  background: linear-gradient(45deg, #0F0E0E, #EF1A1A); /* Degradado negro a rojo */
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  margin: 0 0 1rem 0;
+}
+
+.form-group {
+  margin-bottom: 1rem; /* Espacio entre campos */
+  text-align: left; /* Alinea etiquetas e inputs a la izquierda */
+}
+
+.form-group label {
+  display: block;
+  font-size: 0.875rem;
+  color: #374151; /* Gris oscuro */
+  margin-bottom: 0.25rem;
+}
+
+.form-group input {
+  width: 100%;
+  padding: 0.5rem;
+  border: 1px solid #d1d5db; /* Gris claro */
+  border-radius: 0.25rem;
+  font-size: 0.875rem;
+  color: #111827;
+}
+
+.form-group input:focus {
+  outline: none;
+  border-color: #2563EB; /* Azul como login-btn */
+  box-shadow: 0 0 0 2px rgba(37, 99, 235, 0.2);
+}
+
+.submit-btn {
+  padding: 0.5rem 1rem;
+  background-color: #2563EB; /* Azul como login-btn */
+  color: white;
+  border: none;
+  border-radius: 0.5rem;
+  cursor: pointer;
+  transition: background-color 0.2s;
+  width: 100%;
+  font-size: 0.875rem;
+}
+
+.submit-btn:hover {
+  background-color: #1D4ED8; /* Azul más oscuro */
+}
+
+@keyframes slideFromLeft {
+  0% {
+    opacity: 0;
+    transform: translateX(-20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+/* Responsividad */
+@media (max-width: 768px) {
+  .login-form {
+    padding: 1rem;
+  }
+
+  .login-form h3 {
+    font-size: 1.1rem;
+  }
+
+  .form-group input {
+    font-size: 0.8rem;
+  }
+
+  .submit-btn {
+    font-size: 0.8rem;
+  }
+}

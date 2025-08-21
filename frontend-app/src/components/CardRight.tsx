@@ -1,22 +1,25 @@
-// src/components/CardRight.tsx
 import React from 'react';
 import './CardRight.css';
+import Task from './Task.tsx';
+import LoginForm from './LoginForm.tsx';
+import { useAppContext } from './AppContext.tsx';
 
-interface CardRightProps {
-  // Puedes añadir props aquí en el futuro, por ejemplo:
-  // title?: string;
-  // content?: string;
-}
+const CardRight: React.FC = () => {
+  const { isLoginFormVisible, setIsLoginFormVisible } = useAppContext();
 
-const CardRight: React.FC<CardRightProps> = () => {
+  const handleLoginSubmit = () => {
+    setIsLoginFormVisible(false);
+  };
+
   return (
     <div className="Principal">
-      {/* Div izquierdo */}
       <div className="Izq">
-        <h2>Espacio para tu contenido</h2>
-        <p>Contenido adicional del lado izquierdo.</p>
+        {isLoginFormVisible ? (
+          <LoginForm title="Iniciar Sesión" onSubmit={handleLoginSubmit} />
+        ) : (
+          <Task title="Tareas Importantes" />
+        )}
       </div>
-      {/* Div derecho */}
       <div className="Der">
         <h2>Administra tus tareas en tiempo real y decide quién hace cada cosa</h2>
       </div>

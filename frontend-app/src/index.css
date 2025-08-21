@@ -41,7 +41,7 @@ code {
 
 .parte-izquierda,
 .parte-derecha {
-  flex: 1; /* Cada parte ocupa el mismo espacio horizontal (50%) */
+  flex: auto; /* Cada parte ocupa el mismo espacio horizontal (50%) */
   padding: 1.5rem; /* Espaciado interno */
   display: flex; /* Convierte cada parte en un contenedor flex para alinear contenido */
   flex-direction: column; /* Alinea el contenido interno en columna */
@@ -50,7 +50,7 @@ code {
 }
 
 .parte-izquierda {
-  flex: 1; /* Mantiene el ancho igual al de .parte-derecha */
+  flex: auto; /* Mantiene el ancho igual al de .parte-derecha */
   background-color: #ffffff; /* Fondo blanco para el efecto de tarjeta */
   border: 1px solid #e5e7eb; /* Borde sutil (gris claro) */
   border-radius: 1rem; /* Esquinas redondeadas */
@@ -79,7 +79,9 @@ code {
   color: transparent; /* Hace el texto transparente para mostrar el degradado */
   margin: 0 0 1rem 0; /* Margen inferior para separar del contenido */
 }
-
+.parte-izquierda.compressed {
+  flex: 0.5; /* ~33% del ancho */
+}
 @keyframes slideFromLeft {
   0% {
     opacity: 0;
@@ -92,7 +94,7 @@ code {
 }
 
 .parte-derecha {
-  flex: 1; /* Mantiene el ancho igual al de .parte-izquierda */
+  flex: auto; /* Mantiene el ancho igual al de .parte-izquierda */
   background: linear-gradient(135deg, #EBCBE7, #857373); /* Fondo degradado de rosa claro a oscuro */
   border: 1px solid #e5e7eb; /* Borde sutil (gris claro) */
   border-radius: 1rem; /* Esquinas redondeadas */
@@ -107,6 +109,13 @@ code {
   justify-content: center; /* Centra contenido verticalmente */
 }
 
+.parte-izquierda.compressed {
+  flex: 0.5; /* ~33% del ancho */
+}
+
+.parte-derecha.expanded {
+  flex: 2; /* ~67% del ancho */
+}
 .parte-derecha:hover {
   box-shadow: inset 0 7px 14px rgba(0, 0, 0, 0.15), inset 0 3px 6px rgba(0, 0, 0, 0.1); /* Sombra interior más intensa */
 }

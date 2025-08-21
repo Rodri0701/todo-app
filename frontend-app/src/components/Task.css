@@ -1,0 +1,93 @@
+* {
+  box-sizing: border-box; /* Evita desbordes por padding o bordes */
+}
+
+.task {
+background: linear-gradient(135deg, #ffffff, #b7e0d2);
+  border: 1px solid #e5e7eb; /* Borde gris claro */
+  border-radius: 0.75rem; /* Esquinas redondeadas */
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.08); /* Sombreado exterior */
+  padding: 1rem; /* Espaciado interno */
+  text-align: center;
+  transition: transform 0.2s, box-shadow 0.2s; /* Animación para hover */
+  animation: slideFromLeft 0.5s ease-out forwards; /* Animación de entrada */
+  max-width: 100%; /* Evita desbordamiento */
+  margin-bottom: 1rem; /* Espacio entre tareas */
+}
+
+.task:hover {
+  transform: translateY(-2px); /* Elevación al pasar el mouse */
+  box-shadow: 0 7px 14px rgba(0, 0, 0, 0.1), 0 3px 6px rgba(0, 0, 0, 0.08); /* Sombra más intensa */
+}
+
+.task h3 {
+  font-size: 1.25rem; /* Tamaño más pequeño que los h2 de las tarjetas */
+  font-weight: 600; /* Peso de la fuente */
+  background: linear-gradient(45deg, #0F0E0E, #EF1A1A); /* Degradado negro a rojo */
+  -webkit-background-clip: text; /* Aplica degradado al texto */
+  background-clip: text;
+  color: transparent; /* Muestra el degradado */
+  margin: 0 0 0.75rem 0; /* Margen inferior */
+}
+
+.todo-list {
+  list-style: none; /* Quita viñetas */
+  padding: 0; /* Sin padding */
+  margin: 0; /* Sin margen */
+  display: flex;
+  flex-direction: column; /* Apila los elementos verticalmente */
+  gap: 0.5rem; /* Espacio entre elementos */
+}
+
+.todo-item {
+  display: flex; /* Checkbox y texto en fila */
+  align-items: center; /* Centra verticalmente */
+  gap: 0.5rem; /* Espacio entre checkbox y texto */
+  padding: 0.5rem; /* Espaciado interno */
+  background-color: #a7d6d8; /* Fondo gris claro para cada item */
+  border-radius: 0.25rem; /* Bordes redondeados */
+}
+
+.todo-item.completed .todo-text {
+  text-decoration: line-through; /* Tacha el texto si está completado */
+  color: #000000; /* Gris medio para texto completado */
+}
+
+.todo-item input[type="checkbox"] {
+  width: 1rem;
+  height: 1rem;
+  cursor: pointer;
+  accent-color: #0e5fda; /* Verde para checkbox marcado */
+}
+
+.todo-item .todo-text {
+  font-size: 0.875rem; /* Tamaño del texto */
+  color: #000000; /* Gris oscuro para legibilidad */
+}
+
+@keyframes slideFromLeft {
+  0% {
+    opacity: 0;
+    transform: translateX(-20px); /* Comienza desde la izquierda */
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0); /* Posición normal */
+  }
+}
+
+/* Responsividad para pantallas pequeñas */
+@media (max-width: 767px) {
+  .task {
+    padding: 0.75rem; /* Menos padding */
+    margin-bottom: 0.75rem; /* Menos espacio entre tareas */
+  }
+
+  .task h3 {
+    font-size: 1.1rem; /* Título más pequeño */
+  }
+
+  .todo-item .todo-text {
+    font-size: 0.8rem; /* Texto más pequeño */
+  }
+}
