@@ -1,6 +1,7 @@
 footer {
-  background: linear-gradient(135deg, rgba(255, 255, 255, 0.9), rgba(243, 244, 246, 0.9)); /* Fondo degradado sutil */
-  border: 1px solid #4B5563; /* gray-600 */
+ background: linear-gradient(5deg, #ffffff, #caeee2);
+ border-radius: 1;
+  border-color: #2563EB;
   border-radius: 1rem; /* Esquinas redondeadas */
   color: black;
   padding: 1.5rem 2rem; /* Más espacio x y y */
@@ -15,6 +16,7 @@ footer {
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.08); /* Sombreado exterior como .parte-izquierda */
   min-height: 120px; /* Altura mínima */
   transition: box-shadow 0.2s;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1), 0 6px 9px rgba(0, 0, 0, 0.08);
 }
 
 footer:hover {

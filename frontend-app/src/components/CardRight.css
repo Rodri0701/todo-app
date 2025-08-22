@@ -34,7 +34,7 @@
 
 .Der {
   flex: 1;
-  background: linear-gradient(135deg, #ffffff, #b7e0d2);
+  background: linear-gradient(135deg, #ffffff, #caeee2);
   border: 1px solid #e5e7eb;
   border-radius: 1rem;
   box-shadow: inset 0 4px 6px rgba(0, 0, 0, 0.1), inset 0 1px 3px rgba(0, 0, 0, 0.08);

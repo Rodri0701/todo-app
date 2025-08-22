@@ -4,6 +4,7 @@ import Task from './Task.tsx';
 import LoginForm from './LoginForm.tsx';
 import { useAppContext } from './AppContext.tsx';
 
+
 const CardRight: React.FC = () => {
   const { isLoginFormVisible, setIsLoginFormVisible } = useAppContext();
 

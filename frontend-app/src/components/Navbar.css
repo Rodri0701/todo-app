@@ -1,29 +1,31 @@
-/* src/components/Navbar.css */
-
 .navbar {
   display: flex;
   justify-content: space-between;
   align-items: center;
   padding: 1rem 2rem;
-  background-color: rgba(255, 255, 255, 0.8);
-  border-bottom: 1px solid #4B5563; /* gray-600 */
+  background: linear-gradient(5deg, #ffffff, #caeee2);
+  border: 1px solid #2563EB;
+  border-radius: 1rem;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.08);
+  position: relative;
+  z-index: 10;
 }
 
 .navbar-logo h1 {
   margin: 0;
   font-size: 1.5rem;
   font-weight: bold;
-
-  /* Gradiente de color */
-  background: linear-gradient(90deg, #706969, #E07272); /* colores segun figma */
+  background: linear-gradient(90deg, #706969, #E07272);
   -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-
-  /* Opcional para Firefox */
   background-clip: text;
+  -webkit-text-fill-color: transparent;
   color: transparent;
+  transition: transform 0.2s;
 }
 
+.navbar-logo h1:hover {
+  transform: scale(1.05);
+}
 
 .navbar-links {
   list-style: none;
@@ -41,26 +43,52 @@
 }
 
 .navbar-links li a:hover {
-  color: #2563EB; /* azul */
+  color: #2563EB;
 }
 
-.navbar-actions .login-btn {
-  padding: 0.5rem 1rem;
-  background-color: #2563EB;
-  color: white;
-  border: none;
-  border-radius: 0.5rem;
+.navbar-actions {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+}
+
+.navbar-hamburger {
+  display: none;
   cursor: pointer;
-  transition: background-color 0.2s;
+  font-size: 1.5rem;
 }
 
-.navbar-actions .login-btn:hover {
-  background-color: #1D4ED8;
-}
-
-/* Responsive */
 @media (max-width: 768px) {
+  .navbar {
+    padding: 1rem;
+  }
+
+  .navbar-hamburger {
+    display: block;
+  }
+
   .navbar-links {
-    display: none; /* ocultamos links en móviles, luego podemos agregar menú hamburguesa */
+    display: none;
+  }
+
+  .navbar-links.active {
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background: linear-gradient(5deg, #ffffff, #caeee2);
+    padding: 1rem;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.08);
+    z-index: 9;
+  }
+
+  .navbar-links.active li {
+    padding: 0.5rem 0;
+  }
+
+  .navbar-actions {
+    gap: 0.4rem;
   }
 }

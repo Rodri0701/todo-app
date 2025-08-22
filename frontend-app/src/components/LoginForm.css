@@ -26,6 +26,7 @@
 .form-group {
   margin-bottom: 1rem; /* Espacio entre campos */
   text-align: left; /* Alinea etiquetas e inputs a la izquierda */
+  
 }
 
 .form-group label {
@@ -33,6 +34,7 @@
   font-size: 0.875rem;
   color: #374151; /* Gris oscuro */
   margin-bottom: 0.25rem;
+ 
 }
 
 .form-group input {
@@ -42,6 +44,7 @@
   border-radius: 0.25rem;
   font-size: 0.875rem;
   color: #111827;
+  box-shadow: 0 7px 14px rgba(0, 0, 0, 0.1), 0 3px 6px rgba(0, 0, 0, 0.08);
 }
 
 .form-group input:focus {

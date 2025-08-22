@@ -3,7 +3,7 @@
 }
 
 .task {
-background: linear-gradient(135deg, #ffffff, #b7e0d2);
+background: linear-gradient(135deg, #ffffff, #caeee2);
   border: 1px solid #e5e7eb; /* Borde gris claro */
   border-radius: 0.75rem; /* Esquinas redondeadas */
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.08); /* Sombreado exterior */
@@ -44,8 +44,10 @@ background: linear-gradient(135deg, #ffffff, #b7e0d2);
   align-items: center; /* Centra verticalmente */
   gap: 0.5rem; /* Espacio entre checkbox y texto */
   padding: 0.5rem; /* Espaciado interno */
-  background-color: #a7d6d8; /* Fondo gris claro para cada item */
+  background: linear-gradient(135deg, #ffffff, #caeee2); /* Fondo gris claro para cada item */
   border-radius: 0.25rem; /* Bordes redondeados */
+  border: #0e5fda;
+  box-shadow: 0 7px 14px rgba(0, 0, 0, 0.1), 0 3px 6px rgba(0, 0, 0, 0.08);
 }
 
 .todo-item.completed .todo-text {

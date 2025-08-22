@@ -1,35 +1,123 @@
-import React from 'react';
+import React, { FC, useState } from 'react';
 import './Navbar.css';
 import { useAppContext } from './AppContext.tsx';
+import Button from './Button.tsx';
+import { FaSignInAlt, FaUserPlus } from 'react-icons/fa';
 
-const Navbar: React.FC = () => {
+interface NavbarProps {
+  onMenuToggle: (isOpen: boolean) => void;
+}
+
+const Navbar: FC<NavbarProps> = ({ onMenuToggle }) => {
   const { isLoginFormVisible, setIsLoginFormVisible } = useAppContext();
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+
+  const toggleMenu = () => {
+    setIsMenuOpen((prev) => {
+      const newState = !prev;
+      onMenuToggle(newState);
+      return newState;
+    });
+  };
+
+  const handleSignUp = () => {
+    alert('Abrir formulario de registro');
+    if (isMenuOpen) {
+      setIsMenuOpen(false);
+      onMenuToggle(false);
+    }
+  };
 
   return (
     <nav className="navbar">
       <div className="navbar-logo">
         <h1>Todo App</h1>
       </div>
-
-      <ul className="navbar-links">
-        <li><a href="#home">Home</a></li>
-        <li><a href="#about">About</a></li>
+      <div className="navbar-hamburger" onClick={toggleMenu}>
+        ☰
+      </div>
+      <ul className={`navbar-links ${isMenuOpen ? 'active' : ''}`}>
+        <li>
+          <a
+            href="#home"
+            onClick={() => {
+              setIsMenuOpen(false);
+              onMenuToggle(false);
+            }}
+          >
+            Home
+          </a>
+        </li>
+        <li>
+          <a
+            href="#about"
+            onClick={() => {
+              setIsMenuOpen(false);
+              onMenuToggle(false);
+            }}
+          >
+            About
+          </a>
+        </li>
         {isLoginFormVisible && (
           <>
-           {/*  <li><a href="#tasks">Tasks</a></li>
-            <li><a href="#profile">Profile</a></li>
-            <li><a href="#settings">Settings</a></li> */}
+            <li>
+              <a
+                href="#tasks"
+                onClick={() => {
+                  setIsMenuOpen(false);
+                  onMenuToggle(false);
+                }}
+              >
+                Tasks
+              </a>
+            </li>
+            <li>
+              <a
+                href="#profile"
+                onClick={() => {
+                  setIsMenuOpen(false);
+                  onMenuToggle(false);
+                }}
+              >
+                Profile
+              </a>
+            </li>
+            <li>
+              <a
+                href="#settings"
+                onClick={() => {
+                  setIsMenuOpen(false);
+                  onMenuToggle(false);
+                }}
+              >
+                Settings
+              </a>
+            </li>
           </>
         )}
       </ul>
-
       <div className="navbar-actions">
-        <button
-          className="login-btn"
-          onClick={() => setIsLoginFormVisible(!isLoginFormVisible)}
+        <Button
+          variant="primary"
+          icon={<FaSignInAlt />}
+          onClick={() => {
+            setIsLoginFormVisible(!isLoginFormVisible);
+            if (isMenuOpen) {
+              setIsMenuOpen(false);
+              onMenuToggle(false);
+            }
+          }}
         >
           {isLoginFormVisible ? 'Cancelar' : 'Login'}
-        </button>
+        </Button>
+        <Button
+          variant="secondary"
+          icon={<FaUserPlus />}
+          onClick={handleSignUp}
+        >
+          Sign Up
+        </Button>
       </div>
     </nav>
   );
