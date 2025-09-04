@@ -3,70 +3,66 @@
 }
 
 .login-form {
-  background: linear-gradient(135deg, #ffffff, #b7e0d2);
-  border: 1px solid #e5e7eb; /* Borde gris claro */
-  border-radius: 0.75rem; /* Esquinas redondeadas */
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.08); /* Sombreado exterior */
-  padding: 1.5rem; /* Espaciado interno más grande para el formulario */
+  background: linear-gradient(135deg, #EF1A1A, #F59E0B); /* Degradado cálido */
+  border: 1px solid #e5e7eb;
+  border-radius: 0.75rem;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.08);
+  padding: 1.5rem;
   text-align: center;
-  animation: slideFromLeft 0.5s ease-out forwards; /* Animación como Task */
+  animation: slideFromLeft 0.5s ease-out forwards;
   max-width: 100%;
 }
 
 .login-form h3 {
-  font-size: 1.25rem; /* Igual que Task */
+  font-size: 1.25rem;
   font-weight: 600;
-  background: linear-gradient(45deg, #0F0E0E, #EF1A1A); /* Degradado negro a rojo */
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
+  color: #ffffff; /* Blanco para contraste */
   margin: 0 0 1rem 0;
 }
 
 .form-group {
-  margin-bottom: 1rem; /* Espacio entre campos */
-  text-align: left; /* Alinea etiquetas e inputs a la izquierda */
-  
+  margin-bottom: 1rem;
+  text-align: left;
 }
 
 .form-group label {
   display: block;
   font-size: 0.875rem;
-  color: #374151; /* Gris oscuro */
+  color: #ffffff; /* Blanco para contraste */
   margin-bottom: 0.25rem;
- 
 }
 
 .form-group input {
   width: 100%;
   padding: 0.5rem;
-  border: 1px solid #d1d5db; /* Gris claro */
+  border: 1px solid #ffffff;
   border-radius: 0.25rem;
   font-size: 0.875rem;
   color: #111827;
+  background: rgba(255, 255, 255, 0.9); /* Fondo claro para legibilidad */
   box-shadow: 0 7px 14px rgba(0, 0, 0, 0.1), 0 3px 6px rgba(0, 0, 0, 0.08);
 }
 
 .form-group input:focus {
   outline: none;
-  border-color: #2563EB; /* Azul como login-btn */
+  border-color: #2563EB;
   box-shadow: 0 0 0 2px rgba(37, 99, 235, 0.2);
 }
 
 .submit-btn {
   padding: 0.5rem 1rem;
-  background-color: #2563EB; /* Azul como login-btn */
-  color: white;
+  background: linear-gradient(90deg, #2563EB, #10B981); /* Degradado azul-verde */
+  color: #ffffff;
   border: none;
   border-radius: 0.5rem;
   cursor: pointer;
-  transition: background-color 0.2s;
+  transition: background 0.2s;
   width: 100%;
   font-size: 0.875rem;
 }
 
 .submit-btn:hover {
-  background-color: #1D4ED8; /* Azul más oscuro */
+  background: linear-gradient(90deg, #1D4ED8, #059669); /* Más oscuro */
 }
 
 @keyframes slideFromLeft {
@@ -80,7 +76,6 @@
   }
 }
 
-/* Responsividad */
 @media (max-width: 768px) {
   .login-form {
     padding: 1rem;

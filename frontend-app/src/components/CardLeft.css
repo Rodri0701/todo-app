@@ -1,14 +1,14 @@
 .card-left {
- background: linear-gradient(135deg, #f5f3f5, #e9d8d8);
+  background: linear-gradient(135deg, #ffffff, #d1d5db); /* Degradado suave */
   padding: 1.5rem;
   border-radius: 0.75rem;
   text-align: center;
   margin: 1rem;
-  transition: flex 0.3s ease; /* Transición suave para el cambio de tamaño */
+  transition: flex 0.3s ease;
 }
 
 .card-left.compressed {
-  flex: 0.7; /* Reduce el ancho cuando el formulario está visible */
+  flex: 0.7;
 }
 
 @media (max-width: 768px) {

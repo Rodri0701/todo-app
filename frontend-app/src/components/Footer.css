@@ -1,46 +1,44 @@
 footer {
- background: linear-gradient(5deg, #ffffff, #caeee2);
- border-radius: 1;
-  border-color: #2563EB;
-  border-radius: 1rem; /* Esquinas redondeadas */
-  color: black;
-  padding: 1.5rem 2rem; /* Más espacio x y y */
-  margin: 1rem auto; /* Margen vertical para separación */
+  background: linear-gradient(90deg, #2563EB, #10B981); /* Degradado azul-verde */
+  border: 1px solid #2563EB;
+  border-radius: 1rem;
+  color: #ffffff; /* Blanco para contraste */
+  padding: 1.5rem 2rem;
+  margin: 1rem auto;
   display: flex;
   flex-direction: column;
-  justify-content: center; /* Centra verticalmente */
-  align-items: center; /* Centra horizontalmente */
-  width: 100%; /* Ocupa todo el ancho */
-  max-width: 1200px; /* Limita el ancho máximo para pantallas grandes */
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  max-width: 1200px;
   box-sizing: border-box;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.08); /* Sombreado exterior como .parte-izquierda */
-  min-height: 120px; /* Altura mínima */
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.08);
+  min-height: 120px;
   transition: box-shadow 0.2s;
-  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1), 0 6px 9px rgba(0, 0, 0, 0.08);
 }
 
 footer:hover {
-  box-shadow: 0 7px 14px rgba(0, 0, 0, 0.1), 0 3px 6px rgba(0, 0, 0, 0.08); /* Sombra más intensa al hover */
+  box-shadow: 0 7px 14px rgba(0, 0, 0, 0.1), 0 3px 6px rgba(0, 0, 0, 0.08);
 }
 
 .footer-top {
   display: flex;
   flex-direction: column;
-  align-items: center; /* Centra horizontalmente */
-  justify-content: center; /* Centra verticalmente */
+  align-items: center;
+  justify-content: center;
   gap: 1rem;
   width: 100%;
 }
 
 .footer-icons {
   display: flex;
-  gap: 1.5rem; /* Separación entre íconos */
+  gap: 1.5rem;
   align-items: center;
-  justify-content: center; /* Centra los íconos */
+  justify-content: center;
 }
 
 .footer-icons img {
-  width: 28px; /* Tamaño de íconos */
+  width: 28px;
   height: 28px;
   cursor: pointer;
   transition: transform 0.2s, opacity 0.2s;
@@ -53,32 +51,31 @@ footer:hover {
 
 .footer-bottom {
   margin-top: 1rem;
-  text-align: center; /* Texto centrado */
+  text-align: center;
   font-size: 0.875rem;
 }
 
 .footer-bottom a {
-  color: #2563EB; /* Azul */
+  color: #F59E0B; /* Ámbar para contraste */
   text-decoration: none;
   transition: color 0.2s;
 }
 
 .footer-bottom a:hover {
-  color: #1D4ED8;
+  color: #D97706; /* Ámbar más oscuro */
 }
 
-/* Responsive para pantallas pequeñas */
 @media (max-width: 767px) {
   footer {
-    padding: 1rem; /* Menos padding en pantallas pequeñas */
-    min-height: 100px; /* Altura mínima más pequeña */
+    padding: 1rem;
+    min-height: 100px;
   }
 
   .footer-icons {
-    gap: 1rem; /* Menos separación entre íconos */
+    gap: 1rem;
   }
 
   .footer-bottom {
-    font-size: 0.75rem; /* Texto más pequeño */
+    font-size: 0.75rem;
   }
 }

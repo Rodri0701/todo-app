@@ -9,7 +9,7 @@ interface NavbarProps {
 }
 
 const Navbar: FC<NavbarProps> = ({ onMenuToggle }) => {
-  const { isLoginFormVisible, setIsLoginFormVisible } = useAppContext();
+  const { isLoginFormVisible, setIsLoginFormVisible, isSignUpFormVisible, setIsSignUpFormVisible } = useAppContext();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   const toggleMenu = () => {
@@ -21,7 +21,8 @@ const Navbar: FC<NavbarProps> = ({ onMenuToggle }) => {
   };
 
   const handleSignUp = () => {
-    alert('Abrir formulario de registro');
+    setIsSignUpFormVisible(!isSignUpFormVisible);
+    setIsLoginFormVisible(false); // Cierra el formulario de login si está abierto
     if (isMenuOpen) {
       setIsMenuOpen(false);
       onMenuToggle(false);
@@ -59,7 +60,7 @@ const Navbar: FC<NavbarProps> = ({ onMenuToggle }) => {
             About
           </a>
         </li>
-        {isLoginFormVisible && (
+        {/* {isLoginFormVisible && (
           <>
             <li>
               <a
@@ -95,7 +96,7 @@ const Navbar: FC<NavbarProps> = ({ onMenuToggle }) => {
               </a>
             </li>
           </>
-        )}
+        )} */}
       </ul>
       <div className="navbar-actions">
         <Button

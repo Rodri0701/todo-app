@@ -5,45 +5,45 @@
   font-weight: 500;
   font-size: 1rem;
   cursor: pointer;
-  transition: background-color 0.2s, transform 0.2s, box-shadow 0.2s;
+  transition: background 0.2s, transform 0.2s, box-shadow 0.2s;
   display: inline-flex;
   align-items: center;
   justify-content: center;
 }
 
 .custom-button.primary {
-  background-color: #2563EB; /* Azul del Navbar */
-  color: white;
+  background: linear-gradient(90deg, #2563EB, #10B981); /* Degradado azul-verde */
+  color: #ffffff;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 .custom-button.primary:hover:not(:disabled) {
-  background-color: #1D4ED8; /* Hover más oscuro */
+  background: linear-gradient(90deg, #1D4ED8, #059669); /* Más oscuro */
   transform: translateY(-1px);
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.15);
 }
 
 .custom-button.secondary {
-  background-color: #6B7280; /* Gris neutro */
-  color: white;
+  background: linear-gradient(90deg, #EF1A1A, #F59E0B); /* Degradado cálido */
+  color: #ffffff;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 .custom-button.secondary:hover:not(:disabled) {
-  background-color: #4B5563; /* Hover más oscuro */
+  background: linear-gradient(90deg, #DC2626, #D97706); /* Más oscuro */
   transform: translateY(-1px);
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.15);
 }
 
 .custom-button:disabled {
-  background-color: #D1D5DB; /* Gris claro para deshabilitado */
+  background: #D1D5DB; /* Gris claro */
   color: #6B7280;
   cursor: not-allowed;
   box-shadow: none;
 }
 
 .button-icon {
-  margin-right: 0.5rem; /* Espacio entre ícono y texto */
+  margin-right: 0.5rem;
   display: inline-flex;
   align-items: center;
 }
@@ -55,6 +55,6 @@
   }
 
   .button-icon {
-    margin-right: 0.4rem; /* Espacio reducido en móviles */
+    margin-right: 0.4rem;
   }
 }

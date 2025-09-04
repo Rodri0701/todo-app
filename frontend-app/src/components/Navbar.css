@@ -3,7 +3,7 @@
   justify-content: space-between;
   align-items: center;
   padding: 1rem 2rem;
-  background: linear-gradient(5deg, #ffffff, #caeee2);
+  background: linear-gradient(90deg, #2563EB, #10B981); /* Nuevo degradado */
   border: 1px solid #2563EB;
   border-radius: 1rem;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.08);
@@ -15,7 +15,7 @@
   margin: 0;
   font-size: 1.5rem;
   font-weight: bold;
-  background: linear-gradient(90deg, #706969, #E07272);
+  background: linear-gradient(90deg, #ffffff, #d1d5db); /* Ajustado para contraste */
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;
@@ -37,13 +37,13 @@
 
 .navbar-links li a {
   text-decoration: none;
-  color: #111;
+  color: #ffffff; /* Cambiado a blanco para contraste con el degradado */
   font-weight: 500;
   transition: color 0.2s;
 }
 
 .navbar-links li a:hover {
-  color: #2563EB;
+  color: #F59E0B; /* Ámbar para hover, combina con el degradado */
 }
 
 .navbar-actions {
@@ -56,6 +56,7 @@
   display: none;
   cursor: pointer;
   font-size: 1.5rem;
+  color: #ffffff; /* Blanco para contraste */
 }
 
 @media (max-width: 768px) {
@@ -78,7 +79,7 @@
     top: 100%;
     left: 0;
     right: 0;
-    background: linear-gradient(5deg, #ffffff, #caeee2);
+    background: linear-gradient(90deg, #2563EB, #10B981); /* Mismo degradado en móviles */
     padding: 1rem;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.08);
     z-index: 9;
