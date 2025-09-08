@@ -1,67 +1,76 @@
+/* Navbar container */
 .navbar {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 1rem 2rem;
-  background: linear-gradient(90deg, #2563EB, #10B981); /* Nuevo degradado */
-  border: 1px solid #2563EB;
-  border-radius: 1rem;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.08);
+  padding: 24px 32px; /* Matches TaskShow p-6 with slightly more horizontal padding */
+  background-color: #ffffff; /* Matches TaskShow card bg-white */
+  border: 1px solid #e5e7eb; /* Matches TaskShow border-gray-200 */
+  border-radius: 12px; /* Matches TaskShow rounded-xl */
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25); /* Matches TaskShow shadow-2xl */
   position: relative;
   z-index: 10;
+  transition: all 0.2s ease; /* Matches TaskShow task-item transition */
 }
 
+.navbar:hover {
+  transform: translateY(-2px); /* Matches TaskShow task-item hover */
+  box-shadow: 0 30px 60px -12px rgba(0, 0, 0, 0.3); /* Slightly stronger shadow */
+}
+
+/* Navbar logo */
 .navbar-logo h1 {
   margin: 0;
-  font-size: 1.5rem;
-  font-weight: bold;
-  background: linear-gradient(90deg, #ffffff, #d1d5db); /* Ajustado para contraste */
-  -webkit-background-clip: text;
-  background-clip: text;
-  -webkit-text-fill-color: transparent;
-  color: transparent;
-  transition: transform 0.2s;
+  font-size: 1.875rem; /* Matches TaskShow text-3xl */
+  font-weight: 800; /* Matches TaskShow font-extrabold */
+  color: #111827; /* Matches TaskShow text-gray-900 */
+  transition: transform 0.2s ease;
 }
 
 .navbar-logo h1:hover {
-  transform: scale(1.05);
+  transform: scale(1.05); /* Retained for subtle effect */
 }
 
+/* Navbar links */
 .navbar-links {
   list-style: none;
   display: flex;
-  gap: 1.5rem;
+  gap: 24px; /* Matches footer.css gap-1.5rem (24px) */
   margin: 0;
   padding: 0;
 }
 
 .navbar-links li a {
   text-decoration: none;
-  color: #ffffff; /* Cambiado a blanco para contraste con el degradado */
-  font-weight: 500;
-  transition: color 0.2s;
+  color: #2563eb; /* Matches TaskShow blue-600 */
+  font-weight: 600; /* Matches TaskShow font-semibold */
+  font-size: 1rem; /* Matches button.css */
+  transition: color 0.2s ease;
 }
 
 .navbar-links li a:hover {
-  color: #F59E0B; /* Ámbar para hover, combina con el degradado */
+  color: #1d4ed8; /* Matches TaskShow hover:blue-700 */
 }
 
+/* Navbar actions */
 .navbar-actions {
   display: flex;
-  gap: 0.5rem;
+  gap: 8px; /* Matches TaskShow gap-2 */
   align-items: center;
 }
 
+/* Hamburger menu */
 .navbar-hamburger {
   display: none;
   cursor: pointer;
   font-size: 1.5rem;
-  color: #ffffff; /* Blanco para contraste */
+  color: #111827; /* Matches TaskShow text-gray-900 */
 }
 
-@media (max-width: 768px) {
+/* Responsive adjustments */
+@media (max-width: 640px) {
   .navbar {
-    padding: 1rem;
+    padding: 16px; /* Matches TaskShow sm:p-6 */
   }
 
   .navbar-hamburger {
@@ -79,17 +88,19 @@
     top: 100%;
     left: 0;
     right: 0;
-    background: linear-gradient(90deg, #2563EB, #10B981); /* Mismo degradado en móviles */
-    padding: 1rem;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.08);
+    background-color: #ffffff; /* Matches navbar bg-white */
+    padding: 16px; /* Matches mobile padding */
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25); /* Matches TaskShow shadow-2xl */
     z-index: 9;
+    border: 1px solid #e5e7eb; /* Matches TaskShow border-gray-200 */
+    border-radius: 12px; /* Matches TaskShow rounded-xl */
   }
 
   .navbar-links.active li {
-    padding: 0.5rem 0;
+    padding: 8px 0; /* Matches original 0.5rem */
   }
 
   .navbar-actions {
-    gap: 0.4rem;
+    gap: 6px; /* Slightly smaller for mobile */
   }
 }

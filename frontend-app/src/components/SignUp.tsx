@@ -23,7 +23,7 @@ const SignUp: FC<SignUpProps> = ({ title, onSubmit }) => {
           <input type="email" id="email" placeholder="Add your email" />
         </div>
         <div className="form-group">
-          <label htmlFor="password">Contraseña</label>
+          <label htmlFor="password">Password</label>
           <input type="password" id="password" placeholder="Add your password" />
         </div>
         <Button variant="primary" icon={<FaUserPlus />} onClick={onSubmit}>

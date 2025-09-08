@@ -1,70 +1,93 @@
+/* Reset box-sizing */
 * {
   box-sizing: border-box;
 }
 
+/* Login form container */
 .login-form {
-  background: linear-gradient(135deg, #EF1A1A, #F59E0B); /* Degradado cálido */
-  border: 1px solid #e5e7eb;
-  border-radius: 0.75rem;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.08);
-  padding: 1.5rem;
+  background-color: #ffffff; /* Matches TaskShow card bg-white */
+  border: 1px solid #e5e7eb; /* Matches TaskShow border-gray-200 */
+  border-radius: 12px; /* Matches TaskShow rounded-xl */
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25); /* Matches TaskShow shadow-2xl */
+  padding: 24px; /* Matches TaskShow p-6 */
   text-align: center;
   animation: slideFromLeft 0.5s ease-out forwards;
   max-width: 100%;
+  transition: all 0.2s ease; /* Matches TaskShow task-item transition */
 }
 
+.login-form:hover {
+  transform: translateY(-2px); /* Matches TaskShow task-item hover */
+  box-shadow: 0 30px 60px -12px rgba(0, 0, 0, 0.3); /* Slightly stronger shadow */
+}
+
+/* Form heading */
 .login-form h3 {
-  font-size: 1.25rem;
-  font-weight: 600;
-  color: #ffffff; /* Blanco para contraste */
-  margin: 0 0 1rem 0;
+  font-size: 1.875rem; /* Matches TaskShow text-3xl */
+  font-weight: 800; /* Matches TaskShow font-extrabold */
+  color: #111827; /* Matches TaskShow text-gray-900 */
+  margin: 0 0 24px 0; /* Matches TaskShow mb-6 */
 }
 
+/* Form group */
 .form-group {
-  margin-bottom: 1rem;
+  margin-bottom: 16px; /* Matches TaskShow margin */
   text-align: left;
 }
 
+/* Form label */
 .form-group label {
   display: block;
-  font-size: 0.875rem;
-  color: #ffffff; /* Blanco para contraste */
-  margin-bottom: 0.25rem;
+  font-size: 0.875rem; /* Matches TaskShow text-sm */
+  color: #111827; /* Matches TaskShow text-gray-900 */
+  margin-bottom: 4px; /* Matches original 0.25rem */
 }
 
+/* Form input */
 .form-group input {
   width: 100%;
-  padding: 0.5rem;
-  border: 1px solid #ffffff;
-  border-radius: 0.25rem;
-  font-size: 0.875rem;
-  color: #111827;
-  background: rgba(255, 255, 255, 0.9); /* Fondo claro para legibilidad */
-  box-shadow: 0 7px 14px rgba(0, 0, 0, 0.1), 0 3px 6px rgba(0, 0, 0, 0.08);
+  padding: 8px; /* Matches original 0.5rem */
+  border: 1px solid #e5e7eb; /* Matches TaskShow border-gray-200 */
+  border-radius: 4px; /* Matches original 0.25rem */
+  font-size: 0.875rem; /* Matches TaskShow text-sm */
+  color: #111827; /* Matches TaskShow text-gray-900 */
+  background-color: #f9fafb; /* Matches TaskShow bg-gray-50 */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Lighter shadow for inputs */
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
 }
 
 .form-group input:focus {
   outline: none;
-  border-color: #2563EB;
-  box-shadow: 0 0 0 2px rgba(37, 99, 235, 0.2);
+  border-color: #2563eb; /* Matches TaskShow blue-600 */
+  box-shadow: 0 0 0 2px rgba(37, 99, 235, 0.2); /* Matches original */
 }
 
+/* Submit button */
 .submit-btn {
-  padding: 0.5rem 1rem;
-  background: linear-gradient(90deg, #2563EB, #10B981); /* Degradado azul-verde */
+  padding: 12px 16px; /* Matches button.css custom-button */
+  background-color: #2563eb; /* Matches TaskShow blue-600 */
   color: #ffffff;
   border: none;
-  border-radius: 0.5rem;
+  border-radius: 12px; /* Matches TaskShow rounded-xl */
   cursor: pointer;
-  transition: background 0.2s;
+  transition: background-color 0.2s ease, transform 0.1s ease, box-shadow 0.2s ease;
   width: 100%;
-  font-size: 0.875rem;
+  font-size: 1rem; /* Matches button.css */
+  font-weight: 600; /* Matches button.css font-semibold */
 }
 
 .submit-btn:hover {
-  background: linear-gradient(90deg, #1D4ED8, #059669); /* Más oscuro */
+  background-color: #1d4ed8; /* Matches TaskShow hover:blue-700 */
+  transform: translateY(-2px); /* Matches button.css hover */
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.15);
 }
 
+.submit-btn:active {
+  background-color: #1e40af; /* Matches TaskShow active:blue-800 */
+  transform: scale(0.95); /* Matches button.css active */
+}
+
+/* Slide-in animation */
 @keyframes slideFromLeft {
   0% {
     opacity: 0;
@@ -76,20 +99,21 @@
   }
 }
 
-@media (max-width: 768px) {
+/* Responsive adjustments */
+@media (max-width: 640px) {
   .login-form {
-    padding: 1rem;
+    padding: 16px; /* Matches TaskShow sm:p-6 */
   }
 
   .login-form h3 {
-    font-size: 1.1rem;
+    font-size: 1.5rem; /* Slightly smaller than text-3xl for mobile */
   }
 
   .form-group input {
-    font-size: 0.8rem;
+    font-size: 0.8rem; /* Matches original */
   }
 
   .submit-btn {
-    font-size: 0.8rem;
+    font-size: 0.875rem; /* Matches TaskShow text-sm */
   }
 }

@@ -1,60 +1,76 @@
+/* Base button styles */
 .custom-button {
-  padding: 0.5rem 1rem;
+  padding: 12px 16px; /* Matches add-button padding */
   border: none;
-  border-radius: 0.5rem;
-  font-weight: 500;
-  font-size: 1rem;
+  border-radius: 12px; /* Matches TaskShow rounded-xl */
+  font-weight: 600; /* Matches font-semibold */
+  font-size: 1rem; /* Consistent with add-button */
   cursor: pointer;
-  transition: background 0.2s, transform 0.2s, box-shadow 0.2s;
+  transition: background-color 0.2s ease, transform 0.1s ease, box-shadow 0.2s ease;
   display: inline-flex;
   align-items: center;
   justify-content: center;
 }
 
+/* Primary button (blue, like add-button) */
 .custom-button.primary {
-  background: linear-gradient(90deg, #2563EB, #10B981); /* Degradado azul-verde */
+  background-color: #2563eb; /* Matches bg-blue-600 */
   color: #ffffff;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Subtle shadow */
 }
 
 .custom-button.primary:hover:not(:disabled) {
-  background: linear-gradient(90deg, #1D4ED8, #059669); /* Más oscuro */
-  transform: translateY(-1px);
+  background-color: #1d4ed8; /* Matches hover:bg-blue-700 */
+  transform: translateY(-2px); /* Matches task-item hover */
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.15);
 }
 
+.custom-button.primary:active:not(:disabled) {
+  background-color: #1e40af; /* Matches active:bg-blue-800 */
+  transform: scale(0.95); /* Matches TaskShow active effect */
+}
+
+/* Secondary button (red, like delete-button) */
 .custom-button.secondary {
-  background: linear-gradient(90deg, #EF1A1A, #F59E0B); /* Degradado cálido */
+  background-color: #ef4444; /* Matches bg-red-500 */
   color: #ffffff;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 .custom-button.secondary:hover:not(:disabled) {
-  background: linear-gradient(90deg, #DC2626, #D97706); /* Más oscuro */
-  transform: translateY(-1px);
+  background-color: #dc2626; /* Matches hover:bg-red-600 */
+  transform: translateY(-2px);
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.15);
 }
 
+.custom-button.secondary:active:not(:disabled) {
+  background-color: #b91c1c; /* Matches active:bg-red-700 */
+  transform: scale(0.95);
+}
+
+/* Disabled button */
 .custom-button:disabled {
-  background: #D1D5DB; /* Gris claro */
-  color: #6B7280;
+  background-color: #d1d5db; /* Matches TaskShow gray */
+  color: #6b7280;
   cursor: not-allowed;
   box-shadow: none;
 }
 
+/* Button icon */
 .button-icon {
-  margin-right: 0.5rem;
+  margin-right: 8px; /* Matches gap-2 (8px) */
   display: inline-flex;
   align-items: center;
 }
 
-@media (max-width: 768px) {
+/* Responsive adjustments */
+@media (max-width: 640px) {
   .custom-button {
-    padding: 0.4rem 0.8rem;
-    font-size: 0.9rem;
+    padding: 8px 12px; /* Slightly smaller for mobile */
+    font-size: 0.875rem; /* Matches TaskShow text-sm */
   }
 
   .button-icon {
-    margin-right: 0.4rem;
+    margin-right: 6px; /* Slightly smaller for mobile */
   }
 }

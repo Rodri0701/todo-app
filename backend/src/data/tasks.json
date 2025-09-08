@@ -1,0 +1,34 @@
+[
+  {
+    "id": 1,
+    "title": "Diseñar Dashboard",
+    "description": "Crear layout para la app Todo",
+    "assignedTo": "Rodri0701",
+    "dueDate": "2025-09-10",
+    "status": "In Progress"
+  },
+  {
+    "id": 2,
+    "title": "Implementar API",
+    "description": "Conectar tareas con backend",
+    "assignedTo": "Rodri0701",
+    "dueDate": "2025-09-15",
+    "status": "Pending"
+  },
+  {
+    "id": 3,
+    "title": "Modificar diseño",
+    "description": "Modifica el diseño completo del sitio web",
+    "assignedTo": "Rodri0701",
+    "dueDate": "2025-09-15",
+    "status": "Completed"
+  },
+    {
+    "id": 4,
+    "title": "Subir a GitHub",
+    "description": "sube tus cambios",
+    "assignedTo": "Rodri0701",
+    "dueDate": "2025-09-15",
+    "status": "Urgent"
+  }
+]

@@ -1,72 +1,95 @@
+/* Reset box-sizing */
 * {
   box-sizing: border-box;
 }
 
+/* Task card container */
 .task {
-  background: linear-gradient(135deg, #ffffff, #d1d5db); /* Degradado suave */
-  border: 1px solid #e5e7eb;
-  border-radius: 0.75rem;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.08);
-  padding: 1rem;
+  background-color: #ffffff; /* Matches TaskShow card bg-white */
+  border: 1px solid #e5e7eb; /* Matches TaskShow border-gray-200 */
+  border-radius: 12px; /* Matches TaskShow rounded-xl */
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25); /* Matches TaskShow shadow-2xl */
+  padding: 24px; /* Matches TaskShow p-6 */
   text-align: center;
-  transition: transform 0.2s, box-shadow 0.2s;
+  transition: all 0.2s ease; /* Matches TaskShow task-item transition */
   animation: slideFromLeft 0.5s ease-out forwards;
   max-width: 100%;
-  margin-bottom: 1rem;
+  margin-bottom: 16px; /* Matches TaskShow space-y-4 (16px) */
 }
 
 .task:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 7px 14px rgba(0, 0, 0, 0.1), 0 3px 6px rgba(0, 0, 0, 0.08);
+  transform: translateY(-2px); /* Matches TaskShow task-item hover */
+  box-shadow: 0 30px 60px -12px rgba(0, 0, 0, 0.3); /* Slightly stronger shadow */
 }
 
+/* Task heading */
 .task h3 {
-  font-size: 1.25rem;
-  font-weight: 600;
-  background: linear-gradient(45deg, #EF1A1A, #F59E0B); /* Degradado cálido */
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
-  margin: 0 0 0.75rem 0;
+  font-size: 1.875rem; /* Matches TaskShow text-3xl */
+  font-weight: 800; /* Matches TaskShow font-extrabold */
+  color: #111827; /* Matches TaskShow text-gray-900 */
+  margin: 0 0 24px 0; /* Matches TaskShow mb-6 */
 }
 
+/* Todo list */
 .todo-list {
   list-style: none;
   padding: 0;
   margin: 0;
   display: flex;
   flex-direction: column;
-  gap: 0.5rem;
+  gap: 16px; /* Matches TaskShow space-y-4 */
 }
 
+/* Todo item */
 .todo-item {
   display: flex;
   align-items: center;
-  gap: 0.5rem;
-  padding: 0.5rem;
-  background: linear-gradient(135deg, #ffffff, #d1d5db); /* Degradado suave */
-  border: 1px solid #2563EB; /* Borde azul */
-  border-radius: 0.25rem;
-  box-shadow: 0 7px 14px rgba(0, 0, 0, 0.1), 0 3px 6px rgba(0, 0, 0, 0.08);
+  gap: 8px; /* Matches TaskShow gap-2 */
+  padding: 16px; /* Matches TaskShow task-item padding */
+  background-color: #f9fafb; /* Matches TaskShow bg-gray-50 */
+  border: 1px solid #e5e7eb; /* Matches TaskShow border-gray-200 */
+  border-radius: 12px; /* Matches TaskShow task-item rounded-xl */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Lighter shadow for smaller elements */
+  transition: all 0.2s ease; /* Matches TaskShow task-item transition */
 }
 
+.todo-item.completed {
+  background-color: #ecfdf5; /* Matches TaskShow bg-green-50 */
+  border-color: #bbf7d0; /* Matches TaskShow border-green-200 */
+}
+
+.todo-item.completed:hover {
+  background-color: #d1fae5; /* Matches TaskShow hover:bg-green-100 */
+}
+
+.todo-item:hover {
+  background-color: #f3f4f6; /* Matches TaskShow hover:bg-gray-100 */
+  transform: translateY(-2px); /* Matches TaskShow task-item hover */
+}
+
+/* Completed todo text */
 .todo-item.completed .todo-text {
   text-decoration: line-through;
-  color: #6B7280;
+  color: #6b7280; /* Matches TaskShow text-gray-500 */
+  opacity: 0.7; /* Matches TaskShow opacity-70 */
 }
 
+/* Checkbox */
 .todo-item input[type="checkbox"] {
   width: 1rem;
   height: 1rem;
   cursor: pointer;
-  accent-color: #2563EB; /* Azul */
+  accent-color: #2563eb; /* Matches TaskShow blue-600 */
 }
 
+/* Todo text */
 .todo-item .todo-text {
-  font-size: 0.875rem;
-  color: #111827;
+  font-size: 0.875rem; /* Matches TaskShow text-sm */
+  color: #111827; /* Matches TaskShow text-gray-900 */
+  font-weight: 600; /* Matches TaskShow font-semibold */
 }
 
+/* Slide-in animation */
 @keyframes slideFromLeft {
   0% {
     opacity: 0;
@@ -78,17 +101,18 @@
   }
 }
 
-@media (max-width: 767px) {
+/* Responsive adjustments */
+@media (max-width: 640px) {
   .task {
-    padding: 0.75rem;
-    margin-bottom: 0.75rem;
+    padding: 16px; /* Matches TaskShow sm:p-6 */
+    margin-bottom: 8px; /* Matches TaskShow mobile margin */
   }
 
   .task h3 {
-    font-size: 1.1rem;
+    font-size: 1.5rem; /* Matches LoginForm.css mobile */
   }
 
   .todo-item .todo-text {
-    font-size: 0.8rem;
+    font-size: 0.8rem; /* Matches original */
   }
 }

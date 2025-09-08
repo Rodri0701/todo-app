@@ -1,67 +1,73 @@
+/* Reset box-sizing */
 * {
   box-sizing: border-box;
 }
 
+/* Main container */
 .Principal {
   display: flex;
   justify-content: space-between;
   width: 100%;
-  gap: 1rem;
+  gap: 16px; /* Matches TaskShow gap-2 (8px * 2 for consistency) */
   align-items: stretch;
   height: 100%;
 }
 
+/* Left card */
 .Izq {
   flex: 1.5;
-  background: linear-gradient(135deg, #EF1A1A, #F59E0B); /* Degradado cálido como SignUp */
-  border: 1px solid #e5e7eb;
-  border-radius: 1rem;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.08);
-  padding: 1rem;
+  background-color: #ffffff; /* Matches TaskShow card bg-white */
+  border: 1px solid #e5e7eb; /* Matches TaskShow border-gray-200 */
+  border-radius: 12px; /* Matches TaskShow rounded-xl */
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25); /* Matches TaskShow shadow-2xl */
+  padding: 24px; /* Matches TaskShow p-6 */
   text-align: center;
-  transition: transform 0.2s, box-shadow 0.2s;
+  transition: all 0.2s ease; /* Matches TaskShow task-item transition */
   animation: slideFromLeft 0.5s ease-out forwards;
   max-width: 100%;
   display: flex;
   flex-direction: column;
   justify-content: center;
-  margin: 1rem;
+  margin: 16px; /* Matches TaskShow margin */
 }
 
 .Izq:hover {
-  box-shadow: inset 0 7px 14px rgba(0, 0, 0, 0.15), inset 0 3px 6px rgba(0, 0, 0, 0.1);
+  transform: translateY(-2px); /* Matches TaskShow task-item hover */
+  box-shadow: 0 30px 60px -12px rgba(0, 0, 0, 0.3); /* Slightly stronger shadow */
 }
 
+/* Right card */
 .Der {
   flex: 1;
-  background: linear-gradient(135deg, #2563EB, #10B981); /* Degradado azul-verde como Navbar */
-  border: 1px solid #e5e7eb;
-  border-radius: 1rem;
-  box-shadow: inset 0 4px 6px rgba(0, 0, 0, 0.1), inset 0 1px 3px rgba(0, 0, 0, 0.08);
-  padding: 1rem;
+  background-color: #ffffff; /* Matches TaskShow card bg-white */
+  border: 1px solid #e5e7eb; /* Matches TaskShow border-gray-200 */
+  border-radius: 12px; /* Matches TaskShow rounded-xl */
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25); /* Matches TaskShow shadow-2xl */
+  padding: 24px; /* Matches TaskShow p-6 */
   text-align: center;
-  transition: box-shadow 0.2s;
+  transition: all 0.2s ease; /* Matches TaskShow task-item transition */
   animation: slideFromRight 0.5s ease-out forwards;
   max-width: 100%;
   display: flex;
   flex-direction: column;
   justify-content: center;
+  margin: 16px; /* Matches TaskShow margin */
 }
 
 .Der:hover {
-  box-shadow: inset 0 7px 14px rgba(0, 0, 0, 0.15), inset 0 3px 6px rgba(0, 0, 0, 0.1);
+  transform: translateY(-2px); /* Matches TaskShow task-item hover */
+  box-shadow: 0 30px 60px -12px rgba(0, 0, 0, 0.3); /* Slightly stronger shadow */
 }
 
+/* Right card heading */
 .Der h2 {
-  font-size: 1.5rem;
-  font-weight: 600;
-  background: linear-gradient(45deg, #ffffff, #d1d5db); /* Degradado suave para contraste */
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
-  margin: 0 0 1rem 0;
+  font-size: 1.875rem; /* Matches TaskShow text-3xl */
+  font-weight: 800; /* Matches TaskShow font-extrabold */
+  color: #111827; /* Matches TaskShow text-gray-900 */
+  margin: 0 0 24px 0; /* Matches TaskShow mb-6 */
 }
 
+/* Slide-in animation for left card */
 @keyframes slideFromLeft {
   0% {
     opacity: 0;
@@ -73,6 +79,7 @@
   }
 }
 
+/* Slide-in animation for right card */
 @keyframes slideFromRight {
   0% {
     opacity: 0;
@@ -84,7 +91,8 @@
   }
 }
 
-@media (max-width: 767px) {
+/* Responsive adjustments */
+@media (max-width: 640px) {
   .Principal {
     flex-direction: column;
     align-items: center;
@@ -96,7 +104,7 @@
     flex: none;
     width: 100%;
     min-height: auto;
-    max-height: 50vh;
-    overflow: auto;
+    margin: 8px; /* Matches TaskShow mobile margin */
+    padding: 16px; /* Matches TaskShow sm:p-6 */
   }
 }

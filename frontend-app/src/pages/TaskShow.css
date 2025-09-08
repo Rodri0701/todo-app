@@ -1,0 +1,353 @@
+/* Page wrapper for the entire page */
+.page-wrapper {
+  min-height: 100vh;
+  background-color: #e5e7eb; /* Matches bg-gray-200 */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow-x: hidden; /* Prevent horizontal scroll during animation */
+  perspective: 1000px; /* Enable 3D perspective for flip effect */
+}
+
+/* Task show container for main and completed tasks */
+.task-show-container {
+  position: relative;
+  width: 100%;
+  max-width: 672px; /* Matches card width */
+  min-height: 100vh; /* Ensure full height */
+  transform-style: preserve-3d; /* Preserve 3D for children */
+  transition: transform 0.6s ease-in-out; /* Smooth flip animation */
+}
+
+/* Containers for main and completed tasks */
+.container,
+.completed-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 16px; /* Equivalent to p-4 */
+  backface-visibility: hidden; /* Hide back side during flip */
+}
+
+/* Initial state */
+.container {
+  transform: rotateY(0deg); /* Front face */
+  z-index: 2; /* Front on top */
+}
+
+.completed-container {
+  transform: rotateY(180deg); /* Back face */
+  z-index: 1; /* Back behind */
+}
+
+/* Slide-left state (3D flip) */
+.task-show-container.slide-left {
+  transform: rotateY(180deg); /* Flip the entire container to show back */
+}
+
+/* Floating toggle button (unchanged) */
+.arrow-button.floating-toggle {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  background-color: #3b82f6;
+  color: #ffffff;
+  border: none;
+  border-radius: 12px;
+  padding: 12px 20px;
+  font-size: 0.875rem;
+  font-weight: 500;
+  cursor: pointer;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.arrow-button.floating-toggle.back {
+  background-color: #6b7280;
+}
+
+.arrow-button.floating-toggle:hover {
+  background-color: #2563eb;
+}
+
+.arrow-button.floating-toggle.back:hover {
+  background-color: #4b5563;
+}
+
+/* Card container */
+.card {
+  max-width: 672px;
+  width: 100%;
+  background-color: #ffffff; /* Equivalent to bg-white */
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25); /* Equivalent to shadow-2xl */
+  border-radius: 16px; /* Equivalent to rounded-2xl */
+  padding: 24px; /* Equivalent to p-6 */
+  transition: all 0.3s ease;
+}
+
+.card:hover {
+  transform: translateY(-2px); /* Matches Task.css */
+  box-shadow: 0 30px 60px -12px rgba(0, 0, 0, 0.3);
+}
+
+/* Title styling */
+.title {
+  font-size: 1.875rem; /* Equivalent to text-3xl */
+  font-weight: 800; /* Equivalent to font-extrabold */
+  color: #111827; /* Equivalent to text-gray-900 */
+  margin-bottom: 24px; /* Equivalent to mb-6 */
+  display: flex;
+  align-items: center;
+  gap: 8px; /* Equivalent to gap-2 */
+}
+
+/* Icon styling */
+.icon {
+  font-size: 1.5rem; /* Match emoji size */
+}
+
+/* Task list styling */
+.task-list {
+  margin-bottom: 32px; /* Equivalent to mt-8 for buttons */
+  display: flex;
+  flex-direction: column;
+  gap: 16px; /* Equivalent to space-y-4 */
+}
+
+/* Task item styling */
+.task-item {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 16px; /* Equivalent to p-4 */
+  border-radius: 12px; /* Equivalent to rounded-xl */
+  border: 1px solid;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Lighter shadow */
+  transition: all 0.2s ease;
+}
+
+.task-item:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.15);
+}
+
+.task-item.in-progress {
+  background-color: #fefce8; /* Equivalent to bg-yellow-50 */
+  border-color: #fef08a; /* Equivalent to border-yellow-200 */
+}
+
+.task-item.in-progress:hover {
+  background-color: #fef9c3; /* Equivalent to hover:bg-yellow-100 */
+}
+
+.task-item.pending {
+  background-color: #f9fafb; /* Equivalent to bg-gray-50 */
+  border-color: #e5e7eb; /* Equivalent to border-gray-200 */
+}
+
+.task-item.pending:hover {
+  background-color: #f3f4f6; /* Equivalent to hover:bg-gray-100 */
+}
+
+.task-item.completed {
+  background-color: #ecfdf5; /* Equivalent to bg-green-50 */
+  border-color: #bbf7d0; /* Equivalent to border-green-200 */
+}
+
+.task-item.completed:hover {
+  background-color: #d1fae5; /* Equivalent to hover:bg-green-100 */
+}
+
+/* Task title styling */
+.task-title {
+  font-size: 1.125rem; /* Equivalent to text-lg */
+  font-weight: 600; /* Matches font-semibold */
+  color: #111827; /* Equivalent to text-gray-900 */
+  margin-bottom: 8px; /* Equivalent to mb-2 */
+}
+
+.task-item.in-progress .task-title,
+.task-item.pending .task-title {
+  color: #1f2937; /* Equivalent to text-gray-800 */
+}
+
+.task-item.completed .task-title {
+  color: #6b7280; /* Equivalent to text-gray-500 */
+  text-decoration: line-through;
+  opacity: 0.7; /* Equivalent to opacity-70 */
+}
+
+/* Task details styling */
+.task-item p {
+  font-size: 0.875rem; /* Equivalent to text-sm */
+  color: #4b5563; /* Equivalent to text-gray-600 */
+  margin: 4px 0; /* Tight spacing */
+}
+
+/* Task buttons container */
+.task-buttons {
+  display: flex;
+  justify-content: flex-end;
+  gap: 8px; /* Equivalent to gap-2 */
+  margin-top: 12px;
+  width: 100%;
+}
+
+/* Delete button styling */
+.delete-button {
+  padding: 6px 16px; /* Equivalent to px-4 py-1.5 */
+  font-size: 0.875rem; /* Equivalent to text-sm */
+  font-weight: 600; /* Equivalent to font-semibold */
+  background-color: #dc2626; /* Red-600 */
+  color: #ffffff; /* Matches text-white */
+  border-radius: 8px; /* Equivalent to rounded-lg */
+  border: none;
+  cursor: pointer;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Matches button.css */
+  transition: all 0.3s ease;
+}
+
+.delete-button:hover {
+  background-color: #b91c1c; /* Red-700 */
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.15);
+}
+
+.delete-button:active {
+  background-color: #991b1b; /* Red-800 */
+  transform: scale(0.95);
+}
+
+/* Reminder button styling */
+.ready-button {
+  padding: 6px 16px; /* Matches delete-button */
+  font-size: 0.875rem; /* Equivalent to text-sm */
+  font-weight: 600; /* Equivalent to font-semibold */
+  background-color: #16a34a; /* Green-600 */
+  color: #ffffff; /* Matches text-white */
+  border-radius: 8px; /* Equivalent to rounded-lg */
+  border: none;
+  cursor: pointer;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Matches button.css */
+  transition: all 0.3s ease;
+}
+
+.ready:hover {
+  background-color: #15803d; /* Green-700 */
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.15);
+}
+
+.ready-button:active {
+  background-color: #166534; /* Green-800 */
+  transform: scale(0.95);
+}
+
+/* Bottom buttons container */
+.bottom-buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 16px; /* Matches space-y-4 */
+  margin-top: 16px;
+}
+
+/* Add button styling */
+.add-button {
+  width: 100%;
+  padding: 12px 16px; /* Equivalent to py-3 px-4 */
+  font-size: 1rem; /* Matches button.css */
+  font-weight: 600; /* Equivalent to font-semibold */
+  background-color: #1d4ed8; /* Blue-700 */
+  color: #ffffff; /* Matches text-white */
+  border-radius: 12px; /* Equivalent to rounded-xl */
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px; /* Equivalent to gap-2 */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Matches button.css */
+  transition: all 0.3s ease;
+}
+
+.add-button:hover {
+  background-color: #1e40af; /* Blue-800 */
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.15);
+}
+
+.add-button:active {
+  background-color: #1e3a8a; /* Blue-900 */
+  transform: scale(0.95);
+}
+
+/* Return button styling */
+.return-button {
+  width: 100%;
+  padding: 12px 16px; /* Matches add-button */
+  font-size: 1rem; /* Matches button.css */
+  font-weight: 600; /* Equivalent to font-semibold */
+  background-color: #4b5563; /* Gray-600 */
+  color: #ffffff; /* Matches text-white */
+  border-radius: 12px; /* Matches rounded-xl */
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px; /* Equivalent to gap-2 */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Matches button.css */
+  transition: all 0.3s ease;
+}
+
+.return-button:hover {
+  background-color: #374151; /* Gray-700 */
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.15);
+}
+
+.return-button:active {
+  background-color: #1f2937; /* Gray-800 */
+  transform: scale(0.95);
+}
+
+.task-item.urgent {
+  background-color: #fee2e2; /* Rojo claro */
+  border-color: #f87171;     /* Rojo más intenso */
+}
+
+.task-item.urgent:hover {
+  background-color: #fca5a5; /* Hover rojo */
+}
+
+.task-item.urgent .task-title {
+  color: #b91c1c; /* Rojo fuerte para el título */
+  font-weight: 700;
+}
+
+
+/* Responsive adjustments */
+@media (min-width: 640px) {
+  .page-wrapper {
+    padding: 24px; /* Equivalent to sm:p-6 */
+  }
+  .container,
+  .completed-container {
+    padding: 24px; /* Equivalent to sm:p-6 */
+  }
+  .card {
+    padding: 32px; /* Equivalent to sm:p-8 */
+  }
+  .task-item {
+    padding: 24px; /* Larger padding for desktop */
+  }
+  .task-title {
+    font-size: 1.25rem; /* Slightly larger on desktop */
+  }
+  .task-item p {
+    font-size: 1rem; /* Slightly larger on desktop */
+  }
+}
