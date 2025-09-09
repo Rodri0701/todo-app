@@ -6,22 +6,23 @@
   justify-content: center;
   align-items: center;
   overflow-x: hidden; /* Prevent horizontal scroll during animation */
-  perspective: 1000px; /* Enable 3D perspective for flip effect */
+  perspective: 1600px; /* Increased for deeper 3D effect */
 }
 
-/* Task show container for main and completed tasks */
+/* Task show container for main, completed, and pending tasks */
 .task-show-container {
   position: relative;
   width: 100%;
   max-width: 672px; /* Matches card width */
   min-height: 100vh; /* Ensure full height */
   transform-style: preserve-3d; /* Preserve 3D for children */
-  transition: transform 0.6s ease-in-out; /* Smooth flip animation */
+  z-index: 1; /* Base z-index */
 }
 
-/* Containers for main and completed tasks */
+/* Containers for main, completed, and pending tasks */
 .container,
-.completed-container {
+.completed-container,
+.pending-container {
   position: absolute;
   top: 0;
   left: 0;
@@ -32,30 +33,85 @@
   justify-content: center;
   padding: 16px; /* Equivalent to p-4 */
   backface-visibility: hidden; /* Hide back side during flip */
+  box-shadow: 0 0 40px rgba(0,0,0,0.1);
+  pointer-events: auto; /* Ensure clicks pass through */
 }
 
 /* Initial state */
 .container {
-  transform: rotateY(0deg); /* Front face */
-  z-index: 2; /* Front on top */
+  transform: rotateY(0deg) translateZ(0); /* Front face (main tasks) */
+  background-color: #ffffff;
+  z-index: 3; /* Front on top */
 }
 
+/* Completed and pending containers */
 .completed-container {
-  transform: rotateY(180deg); /* Back face */
-  z-index: 1; /* Back behind */
+  transform: rotateY(180deg) translateZ(0); /* Back face for completed */
+  background-color: #ecfdf5;
+  z-index: 2;
 }
 
-/* Slide-left state (3D flip) */
+.pending-container {
+  transform: rotateY(-180deg) translateZ(0); /* Back face for pending */
+  background-color: #fef2f2;
+  z-index: 2;
+}
+
+/* Animation states with keyframes */
+/* Animaciones tipo hoja de libro sin pausa */
 .task-show-container.slide-left {
-  transform: rotateY(180deg); /* Flip the entire container to show back */
+  animation: slideLeft 1.2s cubic-bezier(0.77, 0, 0.175, 1) forwards;
 }
 
-/* Floating toggle button (unchanged) */
-.arrow-button.floating-toggle {
+.task-show-container.slide-right {
+  animation: slideRight 1.2s cubic-bezier(0.77, 0, 0.175, 1) forwards;
+}
+
+@keyframes slideLeft {
+  0% {
+    transform: rotateY(0deg) translateZ(0) scale(1);
+    box-shadow: 0 0 30px rgba(0,0,0,0.1);
+  }
+  50% {
+    transform: rotateY(90deg) translateZ(-40px) scale(0.98);
+    box-shadow: 0 15px 40px rgba(0,0,0,0.15);
+  }
+  100% {
+    transform: rotateY(180deg) translateZ(0) scale(1);
+    box-shadow: 0 0 30px rgba(0,0,0,0.1);
+  }
+}
+
+@keyframes slideRight {
+  0% {
+    transform: rotateY(0deg) translateZ(0) scale(1);
+    box-shadow: 0 0 30px rgba(0,0,0,0.1);
+  }
+  50% {
+    transform: rotateY(-90deg) translateZ(-40px) scale(0.98);
+    box-shadow: 0 15px 40px rgba(0,0,0,0.15);
+  }
+  100% {
+    transform: rotateY(-180deg) translateZ(0) scale(1);
+    box-shadow: 0 0 30px rgba(0,0,0,0.1);
+  }
+}
+
+
+
+
+/* Ensure child elements are interactive */
+.pending-container *,
+.completed-container * {
+  pointer-events: auto; /* Allow clicks on buttons and other elements */
+}
+
+/* Floating toggle buttons */
+.arrow-button.floating-toggle,
+.arrow-button.floating-pending {
   position: fixed;
   bottom: 24px;
-  right: 24px;
-  background-color: #3b82f6;
+  background-color: #3b82f6; /* Blue-500 */
   color: #ffffff;
   border: none;
   border-radius: 12px;
@@ -63,62 +119,76 @@
   font-size: 0.875rem;
   font-weight: 500;
   cursor: pointer;
-  z-index: 10;
+  z-index: 100; /* Always on top */
   display: flex;
   align-items: center;
   gap: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+  pointer-events: auto;
 }
 
-.arrow-button.floating-toggle.back {
-  background-color: #6b7280;
+.arrow-button.floating-toggle {
+  right: 24px;
 }
 
-.arrow-button.floating-toggle:hover {
-  background-color: #2563eb;
+.arrow-button.floating-pending {
+  left: 24px;
 }
 
-.arrow-button.floating-toggle.back:hover {
-  background-color: #4b5563;
+.arrow-button.floating-toggle:hover,
+.arrow-button.floating-pending:hover {
+  background-color: #2563eb; /* Blue-600 */
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.15);
+}
+
+.arrow-button.floating-toggle.back,
+.arrow-button.floating-pending.back {
+  background-color: #6b7280; /* Gray-500 */
+}
+
+.arrow-button.floating-toggle.back:hover,
+.arrow-button.floating-pending.back:hover {
+  background-color: #4b5563; /* Gray-600 */
 }
 
 /* Card container */
 .card {
   max-width: 672px;
   width: 100%;
-  background-color: #ffffff; /* Equivalent to bg-white */
-  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25); /* Equivalent to shadow-2xl */
-  border-radius: 16px; /* Equivalent to rounded-2xl */
-  padding: 24px; /* Equivalent to p-6 */
+  background-color: #ffffff;
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+  border-radius: 16px;
+  padding: 24px;
   transition: all 0.3s ease;
 }
 
 .card:hover {
-  transform: translateY(-2px); /* Matches Task.css */
+  transform: translateY(-2px);
   box-shadow: 0 30px 60px -12px rgba(0, 0, 0, 0.3);
 }
 
 /* Title styling */
 .title {
-  font-size: 1.875rem; /* Equivalent to text-3xl */
-  font-weight: 800; /* Equivalent to font-extrabold */
-  color: #111827; /* Equivalent to text-gray-900 */
-  margin-bottom: 24px; /* Equivalent to mb-6 */
+  font-size: 1.875rem;
+  font-weight: 800;
+  color: #111827;
+  margin-bottom: 24px;
   display: flex;
   align-items: center;
-  gap: 8px; /* Equivalent to gap-2 */
+  gap: 8px;
 }
 
-/* Icon styling */
 .icon {
-  font-size: 1.5rem; /* Match emoji size */
+  font-size: 1.5rem;
 }
 
 /* Task list styling */
 .task-list {
-  margin-bottom: 32px; /* Equivalent to mt-8 for buttons */
+  margin-bottom: 32px;
   display: flex;
   flex-direction: column;
-  gap: 16px; /* Equivalent to space-y-4 */
+  gap: 16px;
 }
 
 /* Task item styling */
@@ -126,10 +196,10 @@
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  padding: 16px; /* Equivalent to p-4 */
-  border-radius: 12px; /* Equivalent to rounded-xl */
+  padding: 16px;
+  border-radius: 12px;
   border: 1px solid;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Lighter shadow */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   transition: all 0.2s ease;
 }
 
@@ -139,112 +209,152 @@
 }
 
 .task-item.in-progress {
-  background-color: #fefce8; /* Equivalent to bg-yellow-50 */
-  border-color: #fef08a; /* Equivalent to border-yellow-200 */
+  background-color: #fefce8;
+  border-color: #fef08a;
 }
 
 .task-item.in-progress:hover {
-  background-color: #fef9c3; /* Equivalent to hover:bg-yellow-100 */
+  background-color: #fef9c3;
 }
 
 .task-item.pending {
-  background-color: #f9fafb; /* Equivalent to bg-gray-50 */
-  border-color: #e5e7eb; /* Equivalent to border-gray-200 */
+  background-color: #f9fafb;
+  border-color: #e5e7eb;
 }
 
 .task-item.pending:hover {
-  background-color: #f3f4f6; /* Equivalent to hover:bg-gray-100 */
+  background-color: #f3f4f6;
 }
 
 .task-item.completed {
-  background-color: #ecfdf5; /* Equivalent to bg-green-50 */
-  border-color: #bbf7d0; /* Equivalent to border-green-200 */
+  background-color: #ecfdf5;
+  border-color: #bbf7d0;
 }
 
 .task-item.completed:hover {
-  background-color: #d1fae5; /* Equivalent to hover:bg-green-100 */
+  background-color: #d1fae5;
+}
+
+.task-item.urgent {
+  background-color: #fef2f2;
+  border-color: #fecaca;
+}
+
+.task-item.urgent:hover {
+  background-color: #fee2e2;
 }
 
 /* Task title styling */
 .task-title {
-  font-size: 1.125rem; /* Equivalent to text-lg */
-  font-weight: 600; /* Matches font-semibold */
-  color: #111827; /* Equivalent to text-gray-900 */
-  margin-bottom: 8px; /* Equivalent to mb-2 */
+  font-size: 1.125rem;
+  font-weight: 600;
+  color: #111827;
+  margin-bottom: 8px;
 }
 
 .task-item.in-progress .task-title,
-.task-item.pending .task-title {
-  color: #1f2937; /* Equivalent to text-gray-800 */
+.task-item.pending .task-title,
+.task-item.urgent .task-title {
+  color: #1f2937;
 }
 
 .task-item.completed .task-title {
-  color: #6b7280; /* Equivalent to text-gray-500 */
+  color: #6b7280;
   text-decoration: line-through;
-  opacity: 0.7; /* Equivalent to opacity-70 */
+  opacity: 0.7;
 }
 
 /* Task details styling */
 .task-item p {
-  font-size: 0.875rem; /* Equivalent to text-sm */
-  color: #4b5563; /* Equivalent to text-gray-600 */
-  margin: 4px 0; /* Tight spacing */
+  font-size: 0.875rem;
+  color: #4b5563;
+  margin: 4px 0;
 }
 
 /* Task buttons container */
 .task-buttons {
   display: flex;
   justify-content: flex-end;
-  gap: 8px; /* Equivalent to gap-2 */
+  gap: 8px;
   margin-top: 12px;
   width: 100%;
 }
 
-/* Delete button styling */
-.delete-button {
-  padding: 6px 16px; /* Equivalent to px-4 py-1.5 */
-  font-size: 0.875rem; /* Equivalent to text-sm */
-  font-weight: 600; /* Equivalent to font-semibold */
-  background-color: #dc2626; /* Red-600 */
-  color: #ffffff; /* Matches text-white */
-  border-radius: 8px; /* Equivalent to rounded-lg */
+/* Buttons (delete, ready, reminder, add, return) */
+.delete-button,
+.reminder-button,
+.ready-button,
+.add-button,
+.return-button {
+  font-size: 0.875rem;
+  font-weight: 600;
+  border-radius: 8px;
   border: none;
   cursor: pointer;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Matches button.css */
   transition: all 0.3s ease;
 }
 
-.delete-button:hover {
-  background-color: #b91c1c; /* Red-700 */
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.15);
+.delete-button {
+  padding: 6px 16px;
+  background-color: #dc2626;
+  color: #ffffff;
 }
-
+.delete-button:hover {
+  background-color: #b91c1c;
+}
 .delete-button:active {
-  background-color: #991b1b; /* Red-800 */
+  background-color: #991b1b;
   transform: scale(0.95);
 }
 
-/* Reminder button styling */
-.ready-button {
-  padding: 6px 16px; /* Matches delete-button */
-  font-size: 0.875rem; /* Equivalent to text-sm */
-  font-weight: 600; /* Equivalent to font-semibold */
-  background-color: #16a34a; /* Green-600 */
-  color: #ffffff; /* Matches text-white */
-  border-radius: 8px; /* Equivalent to rounded-lg */
-  border: none;
-  cursor: pointer;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Matches button.css */
-  transition: all 0.3s ease;
+.ready-button,
+.reminder-button {
+  padding: 6px 16px;
+  background-color: #16a34a;
+  color: #ffffff;
+}
+.ready-button:hover,
+.reminder-button:hover {
+  background-color: #15803d;
+}
+.ready-button:active,
+.reminder-button:active {
+  background-color: #166534;
+  transform: scale(0.95);
 }
 
-.ready:hover {
-  background-color: #15803d; /* Green-700 */
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.15);
+.add-button,
+.return-button {
+  width: 100%;
+  padding: 12px 16px;
+  font-size: 1rem;
+  font-weight: 600;
+  border-radius: 12px;
+  color: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
 }
-
-.ready-button:active {
-  background-color: #166534; /* Green-800 */
+.add-button {
+  background-color: #1d4ed8;
+}
+.add-button:hover {
+  background-color: #1e40af;
+}
+.add-button:active {
+  background-color: #1e3a8a;
+  transform: scale(0.95);
+}
+.return-button {
+  background-color: #4b5563;
+}
+.return-button:hover {
+  background-color: #374151;
+}
+.return-button:active {
+  background-color: #1f2937;
   transform: scale(0.95);
 }
 
@@ -252,102 +362,30 @@
 .bottom-buttons {
   display: flex;
   flex-direction: column;
-  gap: 16px; /* Matches space-y-4 */
+  gap: 16px;
   margin-top: 16px;
 }
-
-/* Add button styling */
-.add-button {
-  width: 100%;
-  padding: 12px 16px; /* Equivalent to py-3 px-4 */
-  font-size: 1rem; /* Matches button.css */
-  font-weight: 600; /* Equivalent to font-semibold */
-  background-color: #1d4ed8; /* Blue-700 */
-  color: #ffffff; /* Matches text-white */
-  border-radius: 12px; /* Equivalent to rounded-xl */
-  border: none;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 8px; /* Equivalent to gap-2 */
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Matches button.css */
-  transition: all 0.3s ease;
-}
-
-.add-button:hover {
-  background-color: #1e40af; /* Blue-800 */
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.15);
-}
-
-.add-button:active {
-  background-color: #1e3a8a; /* Blue-900 */
-  transform: scale(0.95);
-}
-
-/* Return button styling */
-.return-button {
-  width: 100%;
-  padding: 12px 16px; /* Matches add-button */
-  font-size: 1rem; /* Matches button.css */
-  font-weight: 600; /* Equivalent to font-semibold */
-  background-color: #4b5563; /* Gray-600 */
-  color: #ffffff; /* Matches text-white */
-  border-radius: 12px; /* Matches rounded-xl */
-  border: none;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 8px; /* Equivalent to gap-2 */
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Matches button.css */
-  transition: all 0.3s ease;
-}
-
-.return-button:hover {
-  background-color: #374151; /* Gray-700 */
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.15);
-}
-
-.return-button:active {
-  background-color: #1f2937; /* Gray-800 */
-  transform: scale(0.95);
-}
-
-.task-item.urgent {
-  background-color: #fee2e2; /* Rojo claro */
-  border-color: #f87171;     /* Rojo más intenso */
-}
-
-.task-item.urgent:hover {
-  background-color: #fca5a5; /* Hover rojo */
-}
-
-.task-item.urgent .task-title {
-  color: #b91c1c; /* Rojo fuerte para el título */
-  font-weight: 700;
-}
-
 
 /* Responsive adjustments */
 @media (min-width: 640px) {
   .page-wrapper {
-    padding: 24px; /* Equivalent to sm:p-6 */
+    padding: 24px;
   }
   .container,
-  .completed-container {
-    padding: 24px; /* Equivalent to sm:p-6 */
+  .completed-container,
+  .pending-container {
+    padding: 24px;
   }
   .card {
-    padding: 32px; /* Equivalent to sm:p-8 */
+    padding: 32px;
   }
   .task-item {
-    padding: 24px; /* Larger padding for desktop */
+    padding: 24px;
   }
   .task-title {
-    font-size: 1.25rem; /* Slightly larger on desktop */
+    font-size: 1.25rem;
   }
   .task-item p {
-    font-size: 1rem; /* Slightly larger on desktop */
+    font-size: 1rem;
   }
 }

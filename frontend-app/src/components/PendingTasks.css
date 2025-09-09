@@ -1,0 +1,204 @@
+/* Container for the entire page */
+.container {
+  min-height: 100vh;
+  background-color: #e5e7eb; /* Equivalent to bg-gray-200 */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 16px; /* Equivalent to p-4 */
+}
+
+/* Card container */
+.card {
+  max-width: 672px; /* Equivalent to max-w-2xl */
+  width: 100%;
+  background-color: #ffffff; /* Equivalent to bg-white */
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25); /* Equivalent to shadow-2xl */
+  border-radius: 16px; /* Equivalent to rounded-2xl */
+  padding: 24px; /* Equivalent to p-6 */
+  transition: all 0.3s ease; /* Equivalent to transition-all duration-300 */
+}
+
+.card:hover {
+  transform: translateY(-2px); /* Matches TaskShow.css hover */
+  box-shadow: 0 30px 60px -12px rgba(0, 0, 0, 0.3); /* Slightly stronger shadow */
+}
+
+/* Title styling */
+.title {
+  font-size: 1.875rem; /* Equivalent to text-3xl */
+  font-weight: 800; /* Equivalent to font-extrabold */
+  color: #111827; /* Equivalent to text-gray-900 */
+  margin-bottom: 24px; /* Equivalent to mb-6 */
+  display: flex;
+  align-items: center;
+  gap: 8px; /* Equivalent to gap-2 */
+}
+
+/* Icon styling */
+.icon {
+  font-size: 1.5rem; /* Match emoji size */
+}
+
+/* Task list styling */
+.task-list {
+  margin-bottom: 32px; /* Equivalent to mt-8 for the button */
+  display: flex;
+  flex-direction: column;
+  gap: 16px; /* Equivalent to space-y-4 */
+}
+
+/* Task item styling */
+.task-item {
+  display: flex;
+  flex-direction: column; /* Column layout for readability */
+  align-items: flex-start; /* Align content to the left */
+  padding: 16px; /* Equivalent to p-4 */
+  border-radius: 12px; /* Equivalent to rounded-xl */
+  border: 1px solid; /* Base border style */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Lighter shadow for depth */
+  transition: all 0.2s ease; /* Equivalent to transition-all duration-200 */
+}
+
+.task-item:hover {
+  transform: translateY(-2px); /* Matches TaskShow.css hover */
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.15); /* Slightly stronger shadow */
+}
+
+.task-item.pending {
+  background-color: #f9fafb; /* Equivalent to bg-gray-50 */
+  border-color: #e5e7eb; /* Equivalent to border-gray-200 */
+}
+
+.task-item.pending:hover {
+  background-color: #f3f4f6; /* Equivalent to hover:bg-gray-100 */
+}
+
+/* Task title styling */
+.task-title {
+  font-size: 1.125rem; /* Equivalent to text-lg */
+  font-weight: 600; /* Matches font-semibold for emphasis */
+  color: #111827; /* Equivalent to text-gray-900 */
+  margin-bottom: 8px; /* Equivalent to mb-2 */
+}
+
+/* Task details styling (for description, assignedTo, dueDate, status) */
+.task-item p {
+  font-size: 0.875rem; /* Equivalent to text-sm */
+  color: #4b5563; /* Equivalent to text-gray-600 */
+  margin: 4px 0; /* Tight spacing for details */
+}
+
+/* Task buttons container */
+.task-buttons {
+  display: flex;
+  justify-content: flex-end;
+  gap: 8px;
+  margin-top: 12px;
+  width: 100%;
+}
+
+/* Button styling for Recordatorio and Empezada */
+.btn-Recordatorio {
+  font-size: 0.875rem; /* Equivalent to text-sm */
+  font-weight: 600; /* Matches font-semibold */
+  border-radius: 8px; /* Equivalent to rounded-lg */
+  border: none;
+  cursor: pointer;
+  padding: 6px 16px; /* Matches TaskShow.css */
+  background-color: #16a34a; /* Matches ready-button (green-600) */
+  color: #ffffff; /* Matches text-white */
+  transition: all 0.3s ease; /* Matches TaskShow.css */
+}
+
+.btn-Empezada {
+  font-size: 0.875rem; /* Equivalent to text-sm */
+  font-weight: 600; /* Matches font-semibold */
+  border-radius: 8px; /* Equivalent to rounded-lg */
+  border: none;
+  cursor: pointer;
+  padding: 6px 16px; /* Matches TaskShow.css */
+  background-color: #addf24; /* Matches ready-button (green-600) */
+  color: #ffffff; /* Matches text-white */
+  transition: all 0.3s ease; /* Matches TaskShow.css */
+}
+
+
+.btn-Recordatorio:hover,
+.btn-Empezada:hover {
+  background-color: #15803d; /* Matches ready-button hover (green-700) */
+}
+
+.btn-Empezada:active,
+.btn-Recordatorio:active {
+  background-color: #addf24; /* Matches ready-button active (green-800) */
+  transform: scale(0.95); /* Matches TaskShow.css */
+}
+
+/* No tasks message styling */
+.no-tasks {
+  font-size: 1rem; /* Equivalent to text-base */
+  font-weight: 500; /* Matches font-medium */
+  color: #6b7280; /* Equivalent to text-gray-500 */
+  text-align: center;
+  margin: 24px 0; /* Equivalent to my-6 */
+}
+
+/* Return button styling */
+.return-button {
+  width: 100%;
+  padding: 12px 16px; /* Matches TaskShow.css */
+  font-size: 1rem; /* Matches button.css */
+  font-weight: 600; /* Matches font-semibold */
+  background-color: #6b7280; /* Neutral gray for secondary action */
+  color: #ffffff; /* Matches text-white */
+  border-radius: 12px; /* Matches rounded-xl */
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px; /* Matches gap-2 */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Matches button.css */
+  transition: background-color 0.2s ease, transform 0.1s ease, box-shadow 0.2s ease;
+}
+
+.return-button:hover {
+  background-color: #4b5563; /* Darker gray */
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.15); /* Matches button.css hover */
+}
+
+.return-button:active {
+  background-color: #374151; /* Even darker gray */
+  transform: scale(0.95);
+}
+
+/* Bottom buttons container */
+.bottom-buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin-top: 16px;
+}
+
+/* Responsive adjustments */
+@media (min-width: 640px) {
+  .container {
+    padding: 24px; /* Equivalent to sm:p-6 */
+  }
+  .card {
+    padding: 32px; /* Equivalent to sm:p-8 */
+  }
+  .task-item {
+    padding: 24px; /* Larger padding for desktop */
+  }
+  .task-title {
+    font-size: 1.25rem; /* Slightly larger on desktop */
+  }
+  .task-item p {
+    font-size: 1rem; /* Slightly larger on desktop */
+  }
+  .no-tasks {
+    font-size: 1.125rem; /* Slightly larger on desktop */
+  }
+}

@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from "react";
 import "./TaskShow.css";
 import { useNavigate } from "react-router-dom";
-import Tasks from "../components/Tasks.tsx"; // Componente de tareas completadas
+import Tasks from "../components/Tasks.tsx"; // Tareas completadas
+import PendingTasks from "../components/PendingTasks.tsx"; // Tareas pendientes
 
 interface Task {
   id: number;
@@ -17,11 +18,9 @@ const TaskShow: React.FC = () => {
   const [tasks, setTasks] = useState<Task[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string>("");
-  const [showCompleted, setShowCompleted] = useState<boolean>(false);
+  const [view, setView] = useState<"main" | "pending" | "completed">("main");
 
-  const handleGoHome = () => {
-    navigate("/");
-  };
+  const handleGoHome = () => navigate("/");
 
   useEffect(() => {
     const fetchTasks = async () => {
@@ -42,86 +41,102 @@ const TaskShow: React.FC = () => {
   if (loading) return <p>Cargando tareas...</p>;
   if (error) return <p>Error: {error}</p>;
 
+  // Determina la clase de animación según la vista
+  const containerClass = () => {
+    if (view === "completed") return "task-show-container slide-left";
+    if (view === "pending") return "task-show-container slide-right";
+    return "task-show-container";
+  };
+
   return (
     <div className="page-wrapper">
-      <div className={`task-show-container ${showCompleted ? "slide-left" : ""}`}>
-        {/* Contenedor de tareas principales */}
-        <div className="container">
-          <div className="card">
-            <h1 className="title">
-              <span className="icon">📋</span> Todas las Tareas
-            </h1>
+      <div className={containerClass()}>
+        {/* Vista principal */}
+        {view === "main" && (
+          <div className="container">
+            <div className="card">
+              <h1 className="title">
+                <span className="icon">📋</span> Todas las Tareas del momento
+              </h1>
 
-            <ul className="task-list">
-  {tasks
-    .filter(task => task.status === "In Progress" || task.status === "Urgent")
-    .map((task) => (
-      <li
-        key={task.id}
-        className={`task-item ${
-          task.status === "In Progress"
-            ? "in-progress"
-            : task.status === "Urgent"
-            ? "urgent"
-            : ""
-        }`}
-      >
-        <h3 className="task-title">{task.title}</h3>
-        <p>{task.description}</p>
-        <p>
-          <strong>Asignado a:</strong> {task.assignedTo}
-        </p>
-        <p>
-          <strong>Fecha límite:</strong> {task.dueDate}
-        </p>
-        <p>
-          <strong>Status:</strong> {task.status}
-        </p>
-        <div className="task-buttons">
-          <button className="delete-button">Eliminar</button>
-          
-            <button className="ready-button">Marcar como lista</button>
-          
-        </div>
-      </li>
-    ))}
-</ul>
+              <ul className="task-list">
+                {tasks
+                  .filter((task) => task.status === "In Progress" || task.status === "Urgent")
+                  .map((task) => (
+                    <li
+                      key={task.id}
+                      className={`task-item ${
+                        task.status === "In Progress"
+                          ? "in-progress"
+                          : task.status === "Urgent"
+                          ? "urgent"
+                          : ""
+                      }`}
+                    >
+                      <h3 className="task-title">{task.title}</h3>
+                      <p>{task.description}</p>
+                      <p>
+                        <strong>Asignado a:</strong> {task.assignedTo}
+                      </p>
+                      <p>
+                        <strong>Fecha límite:</strong> {task.dueDate}
+                      </p>
+                      <p>
+                        <strong>Status:</strong> {task.status}
+                      </p>
+                      <div className="task-buttons">
+                        <button className="delete-button">Eliminar</button>
+                        <button className="ready-button">Marcar como lista</button>
+                      </div>
+                    </li>
+                  ))}
+              </ul>
 
-
-            <div className="bottom-buttons">
-              <button className="add-button">
-                <span className="icon">➕</span> Agregar Tarea
-              </button>
-              <button className="return-button" onClick={handleGoHome}>
-                🏠 Volver al Inicio
-              </button>
+              <div className="bottom-buttons">
+                <button className="add-button">
+                  <span className="icon">➕</span> Agregar Tarea
+                </button>
+                <button className="return-button" onClick={handleGoHome}>
+                  🏠 Volver al Inicio
+                </button>
+              </div>
             </div>
           </div>
-        </div>
+        )}
 
-        {/* Contenedor de tareas completadas */}
-        <div className="completed-container">
-          <Tasks /> {/* Solo renderizamos las tareas completadas */}
-        </div>
+        {/* Vista de tareas pendientes */}
+        {view === "pending" && (
+          <div className="pending-container">
+            <PendingTasks />
+          </div>
+        )}
+
+        {/* Vista de tareas completadas */}
+        {view === "completed" && (
+          <div className="completed-container">
+            <Tasks />
+          </div>
+        )}
       </div>
 
-     {/* Botón flotante para mostrar u ocultar tareas completadas */}
-{!showCompleted ? (
-  <button
-    className="arrow-button floating-toggle"
-    onClick={() => setShowCompleted(true)}
-  >
-    ➡️ Ver Tareas Completadas
-  </button>
-) : (
-  <button
-    className="arrow-button floating-toggle back"
-    onClick={() => setShowCompleted(false)}
-  >
-    ⬅️ Volver a Pendientes
-  </button>
-)}
+      {/* Botones flotantes */}
+      {view !== "completed" && (
+        <button className="arrow-button floating-toggle" onClick={() => setView("completed")}>
+          ➡️ Ver Tareas Completadas
+        </button>
+      )}
 
+      {view !== "pending" && (
+        <button className="arrow-button floating-pending" onClick={() => setView("pending")}>
+          ⬅️ Ver Tareas Pendientes
+        </button>
+      )}
+
+      {view !== "main" && (
+        <button className="arrow-button floating-toggle back" onClick={() => setView("main")}>
+          ⬅️ Volver a Tareas Actuales
+        </button>
+      )}
     </div>
   );
 };
