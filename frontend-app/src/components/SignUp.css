@@ -1,75 +1,131 @@
-/* Sign-up form container */
+/* Contenedor principal del formulario de registro */
 .signup-form {
   display: flex;
-  flex-direction: column;
-  gap: 16px; /* Matches TaskShow gap-2 */
-  padding: 24px; /* Matches TaskShow p-6 */
-  background-color: #ffffff; /* Matches TaskShow card bg-white */
-  border: 1px solid #e5e7eb; /* Matches TaskShow border-gray-200 */
-  border-radius: 12px; /* Matches TaskShow rounded-xl */
-  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25); /* Matches TaskShow shadow-2xl */
-  max-width: 400px;
-  margin: 16px auto; /* Matches TaskShow margin */
-  transition: all 0.2s ease; /* Matches TaskShow task-item transition */
+  flex-direction: column; /* Mantiene el título y el formulario en columna */
+  gap: 24px; /* Espaciado mayor para un diseño más amplio */
+  padding: 32px; /* Mayor padding para un aspecto espacioso */
+  background-color: #ffffff; /* Fondo blanco para un diseño claro */
+  border: 1px solid #d1d5db; /* Borde gris claro para delimitar */
+  border-radius: 12px; /* Bordes redondeados para un aspecto moderno */
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05); /* Sombra suave */
+  max-width: 800px; /* Ancho máximo mayor para un formulario más ancho */
+  width: 100%; /* Aprovecha el ancho disponible */
+  margin: 24px auto; /* Centrado horizontal con margen vertical */
+  transition: transform 0.2s ease, box-shadow 0.2s ease; /* Transiciones suaves para hover */
 }
 
+/* Efecto hover para interacción visual */
 .signup-form:hover {
-  transform: translateY(-2px); /* Matches TaskShow task-item hover */
-  box-shadow: 0 30px 60px -12px rgba(0, 0, 0, 0.3); /* Slightly stronger shadow */
+  transform: translateY(-4px); /* Eleva ligeramente el formulario */
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04); /* Sombra más pronunciada */
 }
 
-/* Form heading */
+/* Estilo del título del formulario */
 .signup-form h3 {
-  font-size: 1.875rem; /* Matches TaskShow text-3xl */
-  font-weight: 800; /* Matches TaskShow font-extrabold */
-  color: #111827; /* Matches TaskShow text-gray-900 */
-  margin: 0 0 24px 0; /* Matches TaskShow mb-6 */
-  text-align: center;
+  font-size: 2rem; /* Tamaño de fuente más grande para destacar en un diseño ancho */
+  font-weight: 800; /* Negrita para énfasis */
+  color: #111827; /* Color oscuro para contraste */
+  margin: 0 0 24px 0; /* Espaciado inferior para separar del formulario */
+  text-align: center; /* Centrado para simetría */
 }
 
-/* Form group */
+/* Contenedor del formulario para disposición horizontal */
+.signup-form form {
+  display: flex;
+  flex-wrap: wrap; /* Permite que los campos se distribuyan en varias filas si es necesario */
+  gap: 16px; /* Espaciado entre grupos de campos */
+  justify-content: space-between; /* Distribuye los campos horizontalmente */
+}
+
+/* Contenedor de cada grupo de campo (label + input/select) */
 .form-group {
   display: flex;
-  flex-direction: column;
-  gap: 8px; /* Matches TaskShow gap-2 */
+  flex-direction: column; /* Mantiene label e input en columna dentro del grupo */
+  gap: 8px; /* Espaciado entre etiqueta e input */
+  flex: 1 1 48%; /* Cada grupo ocupa aproximadamente la mitad del ancho, con flexibilidad */
+  min-width: 200px; /* Ancho mínimo para evitar que los campos sean demasiado estrechos */
 }
 
-/* Form label */
+/* Estilo de las etiquetas de los campos */
 .form-group label {
-  font-weight: 600; /* Matches TaskShow font-semibold */
-  color: #111827; /* Matches TaskShow text-gray-900 */
-  font-size: 0.875rem; /* Matches TaskShow text-sm */
+  font-weight: 600; /* Negrita para destacar */
+  color: #111827; /* Color oscuro para legibilidad */
+  font-size: 0.875rem; /* Tamaño de fuente pequeño pero legible */
 }
 
-/* Form input */
-.form-group input {
-  padding: 8px; /* Matches LoginForm.css */
-  border: 1px solid #e5e7eb; /* Matches TaskShow border-gray-200 */
-  border-radius: 4px; /* Matches LoginForm.css */
-  font-size: 0.875rem; /* Matches TaskShow text-sm */
-  background-color: #f9fafb; /* Matches TaskShow bg-gray-50 */
-  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+/* Estilo de los inputs y select */
+.form-group input,
+.form-group select {
+  padding: 10px 12px; /* Espaciado interno para comodidad */
+  border: 1px solid #d1d5db; /* Borde gris claro */
+  border-radius: 6px; /* Bordes redondeados para un diseño moderno */
+  font-size: 0.875rem; /* Tamaño de fuente consistente */
+  background-color: #f9fafb; /* Fondo gris claro para diferenciar */
+  transition: border-color 0.2s ease, box-shadow 0.2s ease; /* Transiciones suaves */
+  width: 100%; /* Asegura que el input ocupe todo el ancho del contenedor */
 }
 
-.form-group input:focus {
-  outline: none;
-  border-color: #2563eb; /* Matches TaskShow blue-600 */
-  box-shadow: 0 0 0 2px rgba(37, 99, 235, 0.2); /* Matches LoginForm.css */
+/* Estilo al enfocar inputs y select */
+.form-group input:focus,
+.form-group select:focus {
+  outline: none; /* Elimina el contorno predeterminado */
+  border-color: #3b82f6; /* Borde azul al enfocar */
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.2); /* Sombra suave para el foco */
 }
 
-/* Responsive adjustments */
-@media (max-width: 640px) {
+/* Estilo específico para el select */
+.form-group select {
+  appearance: none; /* Elimina el estilo predeterminado del navegador */
+  background-image: url("data:image/svg+xml;utf8,<svg fill='black' height='24' viewBox='0 0 24 24' width='24' xmlns='http://www.w3.org/2000/svg'><path d='M7 10l5 5 5-5z'/><path d='M0 0h24v24H0z' fill='none'/></svg>"); /* Ícono de flecha */
+  background-repeat: no-repeat;
+  background-position: right 8px center; /* Posiciona la flecha a la derecha */
+  padding-right: 32px; /* Espacio para la flecha */
+}
+
+/* Estilo para el botón */
+.signup-form button {
+  margin-top: 16px; /* Espaciado superior para separar del formulario */
+  width: 100%; /* Botón ocupa todo el ancho para consistencia */
+  max-width: 200px; /* Limita el ancho del botón para que no sea demasiado grande */
+  align-self: center; /* Centra el botón horizontalmente */
+}
+
+/* Ajustes para pantallas pequeñas */
+@media (max-width: 768px) {
   .signup-form {
-    padding: 16px; /* Matches TaskShow sm:p-6 */
-    max-width: 100%;
-    margin: 8px auto; /* Matches TaskShow mobile margin */
+    padding: 20px; /* Menor padding en pantallas medianas */
+    max-width: 100%; /* Ocupa todo el ancho disponible */
+    margin: 16px auto; /* Margen más pequeño */
+    border-radius: 8px; /* Bordes más pequeños */
   }
 
   .signup-form h3 {
-    font-size: 1.5rem; /* Matches LoginForm.css mobile */
+    font-size: 1.75rem; /* Tamaño de título reducido */
   }
 
-  .form-group input {
-    font-size: 0.8rem; /* Matches LoginForm.css */
+  .form-group {
+    flex: 1 1 100%; /* En pantallas pequeñas, los campos ocupan todo el ancho */
+    min-width: 0; /* Evita desbordamiento */
+  }
+
+  .form-group input,
+  .form-group select {
+    font-size: 0.875rem; /* Tamaño de fuente legible */
+    padding: 8px 10px; /* Menor padding en móviles */
+  }
+
+  .signup-form button {
+    max-width: 100%; /* Botón ocupa todo el ancho en móviles */
+  }
+}
+
+/* Ajustes para pantallas muy pequeñas */
+@media (max-width: 480px) {
+  .signup-form {
+    padding: 16px; /* Padding aún más reducido */
+  }
+
+  .signup-form h3 {
+    font-size: 1.5rem; /* Título más pequeño */
   }
 }

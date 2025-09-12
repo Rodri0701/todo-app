@@ -1,0 +1,22 @@
+[
+  {
+    "id": 1694567890123,
+    "nombre": "Rodrigo",
+    "apellido": "Suna",
+    "edad": 25,
+    "email": "rodrigo@example.com",
+    "password": "miPassword123",
+    "userName": "RexSuna",
+    "jerarquia": "Boss"
+  },
+  {
+    "id": 1757716016219,
+    "nombre": "fsdf",
+    "apellido": "sdffs",
+    "edad": "3",
+    "email": "asda@fa.com",
+    "password": "1234",
+    "userName": "fsdf",
+    "jerarquia": "Soon"
+  }
+]
