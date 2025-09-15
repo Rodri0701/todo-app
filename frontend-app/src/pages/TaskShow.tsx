@@ -4,6 +4,8 @@ import { useNavigate } from "react-router-dom";
 import Tasks from "../components/Tasks.tsx"; // Tareas completadas
 import PendingTasks from "../components/PendingTasks.tsx"; // Tareas pendientes
 
+
+
 interface Task {
   id: number;
   title: string;
@@ -20,7 +22,14 @@ const TaskShow: React.FC = () => {
   const [error, setError] = useState<string>("");
   const [view, setView] = useState<"main" | "pending" | "completed">("main");
 
-  const handleGoHome = () => navigate("/");
+  // Datos del usuario logueado
+  const tagName = localStorage.getItem("tagName") || "Usuario";
+  const jerarquia = localStorage.getItem("jerarquia") || "User";
+
+  const handleGoHome = () => {
+    localStorage.clear(); // Limpiamos sesión
+    navigate("/");
+  };
 
   useEffect(() => {
     const fetchTasks = async () => {
@@ -85,7 +94,7 @@ const TaskShow: React.FC = () => {
                         <strong>Status:</strong> {task.status}
                       </p>
                       <div className="task-buttons">
-                        <button className="delete-button">Eliminar</button>
+                        <button className="delete-button">Delete</button>
                         <button className="ready-button">Marcar como lista</button>
                       </div>
                     </li>
@@ -93,13 +102,15 @@ const TaskShow: React.FC = () => {
               </ul>
 
               <div className="bottom-buttons">
-                <button className="add-button">
-                  <span className="icon">➕</span> Agregar Tarea
-                </button>
-                <button className="return-button" onClick={handleGoHome}>
-                  🏠 Volver al Inicio
-                </button>
-              </div>
+  {jerarquia.trim().toLowerCase() === "boss" && (
+  <button className="add-button" onClick={() => navigate("/pages/NewTask")}>
+    <span className="icon">➕</span> Add New Task
+  </button>
+)}
+  <button className="return-button" onClick={handleGoHome}>
+    🏠 Log out ({tagName})
+  </button>
+</div>
             </div>
           </div>
         )}

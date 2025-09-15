@@ -7,6 +7,7 @@ import CardRight from "./components/CardRight.tsx";
 import TaskShow from "./pages/TaskShow.tsx";
 import { AppProvider, useAppContext } from "./components/AppContext.tsx";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import NewTask from "./pages/NewTask.tsx";
 
 const Home: FC = () => {
   const { isLoginFormVisible, isSignUpFormVisible, isMenuOpen } = useAppContext();
@@ -47,6 +48,9 @@ const App: FC = () => {
 
           {/* Ruta TaskShow */}
           <Route path="/pages/TaskShow" element={<TaskShow />} />
+
+          {/* Ruta NewTask */}
+          <Route path="/pages/NewTask" element={<NewTask />} />
         </Routes>
       </Router>
     </AppProvider>

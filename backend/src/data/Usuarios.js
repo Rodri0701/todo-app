@@ -19,4 +19,19 @@ function guardarUsuarioJSON(usuario) {
     console.log("Usuario guardado ✅");
 }
 
-module.exports = { guardarUsuarioJSON };
+/* Traer a todos los usuarios de un json Existente */
+function traerUsuariosJSON() {
+    const archivo = path.join(__dirname, "usuarios.json");
+    let data = [];
+
+    if (fs.existsSync(archivo)) {
+        const contenido = fs.readFileSync(archivo, "utf-8");
+        if (contenido) {
+            data = JSON.parse(contenido);
+        }
+    }
+
+    return data;
+}
+
+module.exports = { guardarUsuarioJSON , traerUsuariosJSON};

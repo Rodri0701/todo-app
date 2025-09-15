@@ -23,12 +23,22 @@
     "dueDate": "2025-09-15",
     "status": "Completed"
   },
-    {
+  {
     "id": 4,
     "title": "Subir a GitHub",
     "description": "sube tus cambios",
     "assignedTo": "Rodri0701",
     "dueDate": "2025-09-15",
     "status": "Urgent"
+  },
+  {
+    "id": 1757972470020,
+    "title": "Terminar reporte",
+    "description": "Finalizar el reporte semanal y enviarlo al jefe",
+    "assignedTo": "RexSuna",
+    "assignedFrom": "BossUser",
+    "assignedAt": "2025-09-15T14:30:00Z",
+    "dueDate": "2025-09-20",
+    "status": "In Progress"
   }
 ]

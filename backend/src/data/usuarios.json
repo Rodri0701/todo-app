@@ -7,7 +7,8 @@
     "email": "rodrigo@example.com",
     "password": "miPassword123",
     "userName": "RexSuna",
-    "jerarquia": "Boss"
+    "jerarquia": "Boss",
+    "grupo": "TI"
   },
   {
     "id": 1757716016219,
@@ -18,5 +19,27 @@
     "password": "1234",
     "userName": "fsdf",
     "jerarquia": "Soon"
+  },
+  {
+    "id": 1757977630204,
+    "nombre": "Roy",
+    "apellido": "Palos",
+    "edad": "25",
+    "email": "roy@gmail.com",
+    "password": "1234567890",
+    "userName": "Roy",
+    "jerarquia": "Boss",
+    "group": "TI"
+  },
+  {
+    "id": 1757977731644,
+    "nombre": "Roy",
+    "apellido": "Soon",
+    "edad": "20",
+    "email": "RoySon@gmail.com",
+    "password": "0987654321",
+    "userName": "RoySon",
+    "jerarquia": "Soon",
+    "group": "TI"
   }
 ]

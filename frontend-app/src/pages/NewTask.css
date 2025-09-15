@@ -1,0 +1,142 @@
+/* Contenedor principal del formulario de nueva tarea */
+.new-task-form {
+  display: flex;
+  flex-direction: column; /* Organiza título y formulario en columna */
+  gap: 24px; /* Espaciado amplio entre elementos */
+  padding: 32px; /* Padding generoso para un diseño espacioso */
+  background-color: #ffffff; /* Fondo blanco para claridad */
+  border: 1px solid #d1d5db; /* Borde gris claro */
+  border-radius: 12px; /* Bordes redondeados para modernidad */
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05); /* Sombra suave */
+  max-width: 800px; /* Ancho máximo para formularios amplios */
+  width: 100%; /* Aprovecha el ancho disponible */
+  margin: 24px auto; /* Centrado con margen vertical */
+  transition: transform 0.2s ease, box-shadow 0.2s ease; /* Transiciones suaves para hover */
+}
+
+/* Efecto hover para interacción visual */
+.new-task-form:hover {
+  transform: translateY(-4px); /* Eleva ligeramente el formulario */
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04); /* Sombra más pronunciada */
+}
+
+/* Estilo del título del formulario */
+.new-task-form h2 {
+  font-size: 2rem; /* Tamaño grande para destacar */
+  font-weight: 800; /* Negrita para énfasis */
+  color: #111827; /* Color oscuro para contraste */
+  margin: 0 0 24px 0; /* Espaciado inferior */
+  text-align: center; /* Centrado para simetría */
+}
+
+/* Contenedor del formulario */
+.new-task-form form {
+  display: flex;
+  flex-wrap: wrap; /* Permite disposición en varias filas si es necesario */
+  gap: 16px; /* Espaciado entre grupos de campos */
+  justify-content: space-between; /* Distribuye los campos horizontalmente */
+}
+
+/* Contenedor de cada grupo de campo (label + input/textarea) */
+.form-group {
+  display: flex;
+  flex-direction: column; /* Organiza label e input en columna */
+  gap: 8px; /* Espaciado entre etiqueta e input */
+  flex: 1 1 48%; /* Cada grupo ocupa aproximadamente la mitad del ancho */
+  min-width: 200px; /* Ancho mínimo para evitar campos estrechos */
+}
+
+/* Estilo de las etiquetas de los campos */
+.form-group label {
+  font-weight: 600; /* Negrita para destacar */
+  color: #111827; /* Color oscuro para legibilidad */
+  font-size: 0.875rem; /* Tamaño de fuente pequeño pero legible */
+}
+
+/* Estilo de los inputs y textarea */
+.form-group input,
+.form-group textarea {
+  padding: 10px 12px; /* Espaciado interno cómodo */
+  border: 1px solid #d1d5db; /* Borde gris claro */
+  border-radius: 6px; /* Bordes redondeados */
+  font-size: 0.875rem; /* Tamaño de fuente consistente */
+  background-color: #f9fafb; /* Fondo gris claro */
+  transition: border-color 0.2s ease, box-shadow 0.2s ease; /* Transiciones suaves */
+  width: 100%; /* Ocupa todo el ancho del contenedor */
+}
+
+/* Estilo específico para textarea */
+.form-group textarea {
+  min-height: 100px; /* Altura mínima para textarea */
+  resize: vertical; /* Permite redimensionar solo verticalmente */
+}
+
+/* Estilo al enfocar inputs y textarea */
+.form-group input:focus,
+.form-group textarea:focus {
+  outline: none; /* Elimina contorno predeterminado */
+  border-color: #3b82f6; /* Borde azul al enfocar */
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.2); /* Sombra suave para foco */
+}
+
+/* Estilo para el botón de enviar */
+.submit-btn {
+  margin-top: 16px; /* Espaciado superior */
+  width: 100%; /* Ocupa todo el ancho */
+  max-width: 200px; /* Limita el ancho del botón */
+  align-self: center; /* Centra el botón */
+  padding: 10px 12px; /* Espaciado interno */
+  background-color: #3b82f6; /* Fondo azul */
+  color: #ffffff; /* Texto blanco */
+  border: none; /* Sin borde */
+  border-radius: 6px; /* Bordes redondeados */
+  font-size: 0.875rem; /* Tamaño de fuente */
+  font-weight: 600; /* Negrita */
+  cursor: pointer; /* Cursor de interacción */
+  transition: background-color 0.2s ease; /* Transición suave */
+}
+
+/* Efecto hover para el botón */
+.submit-btn:hover {
+  background-color: #2563eb; /* Azul más oscuro al pasar el ratón */
+}
+
+/* Ajustes para pantallas medianas */
+@media (max-width: 768px) {
+  .new-task-form {
+    padding: 20px; /* Menor padding */
+    max-width: 100%; /* Ocupa todo el ancho */
+    margin: 16px auto; /* Margen más pequeño */
+    border-radius: 8px; /* Bordes más pequeños */
+  }
+
+  .new-task-form h2 {
+    font-size: 1.75rem; /* Título reducido */
+  }
+
+  .form-group {
+    flex: 1 1 100%; /* Campos ocupan todo el ancho */
+    min-width: 0; /* Evita desbordamiento */
+  }
+
+  .form-group input,
+  .form-group textarea {
+    font-size: 0.875rem; /* Tamaño de fuente legible */
+    padding: 8px 10px; /* Menor padding */
+  }
+
+  .submit-btn {
+    max-width: 100%; /* Botón ocupa todo el ancho */
+  }
+}
+
+/* Ajustes para pantallas muy pequeñas */
+@media (max-width: 480px) {
+  .new-task-form {
+    padding: 16px; /* Padding reducido */
+  }
+
+  .new-task-form h2 {
+    font-size: 1.5rem; /* Título más pequeño */
+  }
+}
