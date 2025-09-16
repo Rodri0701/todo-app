@@ -70,15 +70,7 @@ const Navbar: FC<NavbarProps> = ({ onMenuToggle }) => {
         ☰
       </div>
 
-      <ul className={`navbar-links ${isMenuOpen ? 'active' : ''}`}>
-        <li>
-          <a href="#home" onClick={() => { setIsMenuOpen(false); onMenuToggle(false); }}>Home</a>
-        </li>
-        <li>
-          <a href="#about" onClick={() => { setIsMenuOpen(false); onMenuToggle(false); }}>About</a>
-        </li>
-      </ul>
-
+      
       <div className="navbar-actions">
         {!tagName && (
           <>

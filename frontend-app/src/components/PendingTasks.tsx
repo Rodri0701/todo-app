@@ -26,6 +26,14 @@ const PendingTasks: React.FC = () => {
     navigate("/");
   };
 
+// Función para enviar recordatorio
+const handleReminder = (taskTitle: string) => {
+  alert(`🔔 Recordatorio: No olvides realizar la tarea "${taskTitle}"`);
+};
+
+
+
+
   // Función para marcar tarea como "in progress"
   const handleMarkAsInProgress = async (taskId: number) => {
     const confirmUpdate = window.confirm("¿Marcar esta tarea como 'En progreso'?");
@@ -108,8 +116,12 @@ const PendingTasks: React.FC = () => {
                 <p>
                   <strong>Status:</strong> {task.status}
                 </p>
+                {/* Btn de recordatorio */}
                 <div className="task-buttons">
-                  <button className="btn-Recordatorio">Recordatorio</button>
+                  <button className="btn-Recordatorio"
+                  onClick={() => handleReminder(task.title)}>
+                    Recordatorio</button>
+                  {/* btn de empezar */}
                   <button
                     className="btn-Empezada"
                     onClick={() => handleMarkAsInProgress(task.id)}
