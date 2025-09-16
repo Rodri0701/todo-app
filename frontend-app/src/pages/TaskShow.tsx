@@ -37,6 +37,9 @@ const TaskShow: React.FC = () => {
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string>("");
   const [view, setView] = useState<"main" | "pending" | "completed">("main");
+  const [prevView, setPrevView] = useState<"main" | "pending" | "completed">("main");
+  const [animating, setAnimating] = useState(false);
+  const [refreshMain, setRefreshMain] = useState(0); // Nuevo estado para recargar main
 
   const { setLoggedUser } = useAppContext();
 
@@ -64,45 +67,46 @@ const TaskShow: React.FC = () => {
       const data = await response.json();
       console.log(data.message);
 
-      // Actualizamos el estado eliminando la tarea
       setTasks((prev: Task[]) => prev.filter((task: Task) => task.id !== taskId));
     } catch (error) {
       console.error("Error al eliminar la tarea:", error);
       alert("No se pudo eliminar la tarea.");
     }
   };
- //Funcion para actualizar la tarea
 
-const handleMarkAsCompleted = async (taskId: number) => {
+  // Función para actualizar la tarea
+ const handleMarkAsCompleted = async (taskId: number) => {
   const confirmUpdate = window.confirm("¿Marcar esta tarea como completada?");
   if (!confirmUpdate) return;
 
   try {
     const response = await fetch(`http://localhost:5000/tasks/${taskId}`, {
       method: "PUT",
-      headers: {
-        "Content-Type": "application/json",
-      },
+      headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ status: "completed" }),
     });
 
     const data = await response.json();
     console.log(data.message);
 
-    // Actualizamos el estado local para reflejar el cambio
+    // Actualizamos el estado local
     setTasks((prev: Task[]) =>
-      prev.map((task: Task) =>
-        task.id === taskId ? { ...task, status: "completed" } : task
-      )
+      prev.filter((task) => task.id !== taskId) // quitamos la tarea completada
     );
+
+    // Opcional: si estás en otra vista, regresamos a main
+    setView("main");
   } catch (error) {
     console.error("Error al actualizar la tarea:", error);
     alert("No se pudo actualizar la tarea.");
   }
 };
 
+
+  // Fetch de tareas (ahora depende de refreshMain)
   useEffect(() => {
     const fetchTasks = async () => {
+      setLoading(true);
       try {
         const response = await fetch("http://localhost:5000/tasks");
         if (!response.ok) throw new Error("Error al obtener tareas");
@@ -121,10 +125,6 @@ const handleMarkAsCompleted = async (taskId: number) => {
           return false;
         });
 
-        console.log(`Tareas filtradas (${role}):`, filtered.length);
-        if (filtered.length === 0)
-          console.log(`No se encontraron tareas para userName: ${userName}, group: ${group}`);
-
         setTasks(filtered);
       } catch (err: any) {
         setError(err.message);
@@ -134,65 +134,63 @@ const handleMarkAsCompleted = async (taskId: number) => {
     };
 
     fetchTasks();
-  }, [jerarquia, userName, group]);
+  }, [jerarquia, userName, group, refreshMain]);
+
+  // Función para manejar cambio de vista con animación
+  const handleViewChange = (newView: "main" | "pending" | "completed") => {
+    if (view === newView || animating) return;
+
+    setPrevView(view);
+    setAnimating(true);
+
+    setTimeout(() => {
+      setView(newView);
+      setAnimating(false);
+
+      // Si vamos a main, disparamos recarga
+      if (newView === "main") setRefreshMain((prev) => prev + 1);
+    }, 1200);
+  };
+
+  const containerClass = () => {
+    let baseClass = "task-show-container";
+    if (animating) {
+      if (prevView === "pending") return baseClass + " slide-out-right";
+      if (prevView === "completed") return baseClass + " slide-out-left";
+    }
+    if (view === "completed") return baseClass + " slide-left";
+    if (view === "pending") return baseClass + " slide-right";
+    return baseClass + " fade-in";
+  };
 
   if (loading) return <div className="page-wrapper"><p className="loading-message">Cargando tareas...</p></div>;
   if (error) return <div className="page-wrapper"><p className="error-message">Error: {error}</p></div>;
 
-  const containerClass = () => {
-    if (view === "completed") return "task-show-container slide-left";
-    if (view === "pending") return "task-show-container slide-right";
-    return "task-show-container";
-  };
-
   return (
     <div className="page-wrapper">
       <div className={containerClass()}>
-        {/* Vista principal */}
         {view === "main" && (
           <div className="container">
             <div className="card">
-              <h1 className="title">
-                <span className="icon">📋</span> Tareas Actuales
-              </h1>
+              <h1 className="title"><span className="icon">📋</span> Tareas Actuales</h1>
 
               {tasks.length === 0 ? (
                 <p className="no-tasks-message">No hay tareas urgentes o en progreso disponibles.</p>
               ) : (
                 <ul className="task-list">
                   {tasks.map((task) => (
-                    <li
-                      key={task.id}
-                      className={`task-item ${
-                        task.status.toLowerCase() === "in progress" ? "in-progress" : "urgent"
-                      }`}
-                    >
+                    <li key={task.id} className={`task-item ${task.status.toLowerCase() === "in progress" ? "in-progress" : "urgent"}`}>
                       <h3 className="task-title">{task.title}</h3>
                       <p>{task.description}</p>
-                      <p>
-                        <strong>Asignado a:</strong> {task.assignedTo}
-                      </p>
-                      <p>
-                        <strong>Grupo:</strong> {task.group || "Sin grupo"}
-                      </p>
-                      <p>
-                        <strong>Fecha límite:</strong> {task.dueDate}
-                      </p>
-                      <p>
-                        <strong>Estado:</strong> {getStatusLabel(task.status)}
-                      </p>
+                      <p><strong>Asignado a:</strong> {task.assignedTo}</p>
+                      <p><strong>Grupo:</strong> {task.group || "Sin grupo"}</p>
+                      <p><strong>Fecha límite:</strong> {task.dueDate}</p>
+                      <p><strong>Estado:</strong> {getStatusLabel(task.status)}</p>
                       <div className="task-buttons">
                         {jerarquia.trim().toLowerCase() === "boss" && (
-                          <button
-                            className="delete-button"
-                            onClick={() => handleDeleteTask(task.id)}
-                          >
-                            Delete
-                          </button>
+                          <button className="delete-button" onClick={() => handleDeleteTask(task.id)}>Delete</button>
                         )}
-                        <button className="ready-button"
-                        onClick={() => handleMarkAsCompleted(task.id)}>
-                          Marcar como lista</button>
+                        <button className="ready-button" onClick={() => handleMarkAsCompleted(task.id)}>Marcar como lista</button>
                       </div>
                     </li>
                   ))}
@@ -205,22 +203,18 @@ const handleMarkAsCompleted = async (taskId: number) => {
                     <span className="icon">➕</span> Nueva Tarea
                   </button>
                 )}
-                <button className="return-button" onClick={handleGoHome}>
-                  🏠 Cerrar sesión ({tagName})
-                </button>
+                <button className="return-button" onClick={handleGoHome}>🏠 Cerrar sesión ({tagName})</button>
               </div>
             </div>
           </div>
         )}
 
-        {/* Vista de tareas pendientes */}
         {view === "pending" && (
           <div className="pending-container">
             <PendingTasks />
           </div>
         )}
 
-        {/* Vista de tareas completadas */}
         {view === "completed" && (
           <div className="completed-container">
             <Tasks />
@@ -230,19 +224,19 @@ const handleMarkAsCompleted = async (taskId: number) => {
 
       {/* Botones flotantes */}
       {view !== "completed" && (
-        <button className="arrow-button floating-toggle" onClick={() => setView("completed")}>
+        <button className="arrow-button floating-toggle" onClick={() => handleViewChange("completed")}>
           ➡️ Ver Tareas Completadas
         </button>
       )}
 
       {view !== "pending" && (
-        <button className="arrow-button floating-pending" onClick={() => setView("pending")}>
+        <button className="arrow-button floating-pending" onClick={() => handleViewChange("pending")}>
           ⬅️ Ver Tareas Pendientes
         </button>
       )}
 
       {view !== "main" && (
-        <button className="arrow-button floating-toggle back" onClick={() => setView("main")}>
+        <button className="arrow-button floating-toggle back" onClick={() => handleViewChange("main")}>
           ⬅️ Volver a Tareas Actuales
         </button>
       )}
