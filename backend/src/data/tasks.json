@@ -1,44 +1,57 @@
 [
   {
-    "id": 1,
-    "title": "Diseñar Dashboard",
-    "description": "Crear layout para la app Todo",
-    "assignedTo": "Rodri0701",
-    "dueDate": "2025-09-10",
-    "status": "In Progress"
+    "title": "Prueba 2",
+    "description": "Hola",
+    "assignedTo": "RoySon",
+    "assignedFrom": "Roy",
+    "group": "TI",
+    "assignedAt": "2025-09-16T04:45:06.578Z",
+    "dueDate": "2025-09-16",
+    "status": "completed",
+    "id": 1757997906591
   },
   {
-    "id": 2,
-    "title": "Implementar API",
-    "description": "Conectar tareas con backend",
-    "assignedTo": "Rodri0701",
-    "dueDate": "2025-09-15",
-    "status": "Pending"
+    "title": "Prueba 3",
+    "description": "iasjhdb",
+    "assignedTo": "RoySon",
+    "assignedFrom": "Roy",
+    "group": "TI",
+    "assignedAt": "2025-09-16T04:49:49.481Z",
+    "dueDate": "2025-09-16",
+    "status": "completed",
+    "id": 1757998189491
   },
   {
-    "id": 3,
-    "title": "Modificar diseño",
-    "description": "Modifica el diseño completo del sitio web",
-    "assignedTo": "Rodri0701",
-    "dueDate": "2025-09-15",
-    "status": "Completed"
+    "title": "Prueba 4",
+    "description": "Hola",
+    "assignedTo": "RoySon",
+    "assignedFrom": "Roy",
+    "group": "TI",
+    "assignedAt": "2025-09-16T04:54:06.049Z",
+    "dueDate": "2025-09-16",
+    "status": "in progress",
+    "id": 1757998446058
   },
   {
-    "id": 4,
-    "title": "Subir a GitHub",
-    "description": "sube tus cambios",
-    "assignedTo": "Rodri0701",
-    "dueDate": "2025-09-15",
-    "status": "Urgent"
+    "title": "Prueba",
+    "description": "Hola",
+    "assignedTo": "RoySon",
+    "assignedFrom": "Roy",
+    "group": "TI",
+    "assignedAt": "2025-09-16T04:55:29.773Z",
+    "dueDate": "2025-09-17",
+    "status": "pending",
+    "id": 1757998529785
   },
   {
-    "id": 1757972470020,
-    "title": "Terminar reporte",
-    "description": "Finalizar el reporte semanal y enviarlo al jefe",
-    "assignedTo": "RexSuna",
-    "assignedFrom": "BossUser",
-    "assignedAt": "2025-09-15T14:30:00Z",
-    "dueDate": "2025-09-20",
-    "status": "In Progress"
+    "title": "Prueba de Perez",
+    "description": "Hola perez",
+    "assignedTo": "Pz",
+    "assignedFrom": "Roy",
+    "group": "TI",
+    "assignedAt": "2025-09-16T05:35:20.908Z",
+    "dueDate": "2025-09-17",
+    "status": "pending",
+    "id": 1758000920915
   }
 ]

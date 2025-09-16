@@ -7,6 +7,7 @@ interface Task {
   title: string;
   description: string;
   assignedTo: string;
+  group?: string;
   dueDate: string;
   status: string;
 }
@@ -17,20 +18,55 @@ const PendingTasks: React.FC = () => {
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string>("");
 
+  const jerarquia = localStorage.getItem("jerarquia") || "User";
+  const userName = localStorage.getItem("userName") || "";
+  const group = localStorage.getItem("group") || "";
+
   const handleGoHome = () => {
     navigate("/");
+  };
+
+  // Función para marcar tarea como "in progress"
+  const handleMarkAsInProgress = async (taskId: number) => {
+    const confirmUpdate = window.confirm("¿Marcar esta tarea como 'En progreso'?");
+    if (!confirmUpdate) return;
+
+    try {
+      const response = await fetch(`http://localhost:5000/tasks/${taskId}`, {
+        method: "PUT",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ status: "in progress" }),
+      });
+
+      const data = await response.json();
+      console.log(data.message);
+
+      // Eliminamos la tarea de la lista de pendientes
+      setTasks(prevTasks => prevTasks.filter(task => task.id !== taskId));
+    } catch (err) {
+      console.error("Error al actualizar la tarea:", err);
+      alert("No se pudo actualizar la tarea.");
+    }
   };
 
   useEffect(() => {
     const fetchTasks = async () => {
       try {
         const response = await fetch("http://localhost:5000/tasks");
-        if (!response.ok) {
-          throw new Error("Error al obtener tareas");
-        }
+        if (!response.ok) throw new Error("Error al obtener tareas");
         const data: Task[] = await response.json();
-        // Filtramos solo las tareas pendientes
-        const pendingTasks = data.filter(task => task.status === "Pending");
+
+        const pendingTasks = data.filter((task) => {
+          const isPending = task.status.toLowerCase() === "pending";
+          const matchesUser = task.assignedTo === userName;
+          const matchesGroup = task.group === group;
+
+          const role = jerarquia.trim().toLowerCase();
+          if (role === "soon") return isPending && matchesUser && matchesGroup;
+          if (role === "boss") return isPending && matchesGroup;
+          return false;
+        });
+
         setTasks(pendingTasks);
       } catch (err: any) {
         setError(err.message);
@@ -40,7 +76,7 @@ const PendingTasks: React.FC = () => {
     };
 
     fetchTasks();
-  }, []);
+  }, [jerarquia, userName, group]);
 
   if (loading) return <p>Cargando tareas pendientes...</p>;
   if (error) return <p>Error: {error}</p>;
@@ -56,12 +92,15 @@ const PendingTasks: React.FC = () => {
           <p className="no-tasks">No hay tareas pendientes aún.</p>
         ) : (
           <ul className="task-list">
-            {tasks.map(task => (
+            {tasks.map((task) => (
               <li key={task.id} className="task-item pending">
                 <h3 className="task-title">{task.title}</h3>
                 <p>{task.description}</p>
                 <p>
                   <strong>Asignado a:</strong> {task.assignedTo}
+                </p>
+                <p>
+                  <strong>Grupo:</strong> {task.group || "Sin grupo"}
                 </p>
                 <p>
                   <strong>Fecha límite:</strong> {task.dueDate}
@@ -71,14 +110,17 @@ const PendingTasks: React.FC = () => {
                 </p>
                 <div className="task-buttons">
                   <button className="btn-Recordatorio">Recordatorio</button>
-                  <button className="btn-Empezada">Empezada</button>
+                  <button
+                    className="btn-Empezada"
+                    onClick={() => handleMarkAsInProgress(task.id)}
+                  >
+                    Empezada
+                  </button>
                 </div>
               </li>
             ))}
           </ul>
         )}
-
-        
       </div>
     </div>
   );

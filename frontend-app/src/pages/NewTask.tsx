@@ -22,22 +22,18 @@ const NewTask: React.FC<NewTaskProps> = () => {
   const [description, setDescription] = useState("");
   const [assignedTo, setAssignedTo] = useState("");
   const [dueDate, setDueDate] = useState("");
-  const [groupUsers, setGroupUsers] = useState<User[]>([]); // usuarios del mismo grupo
+  const [status, setStatus] = useState("Pendiente"); // 👈 estado editable por el usuario
+  const [groupUsers, setGroupUsers] = useState<User[]>([]);
 
-
-  
   useEffect(() => {
     const fetchUsers = async () => {
       if (!loggedUser) return;
       try {
         const res = await fetch("http://localhost:5000/usuarios");
         const data: User[] = await res.json();
-        console.log("LoggedUser group:", loggedUser.group);
-console.log("Usuarios:", data);
 
-        // Filtrar por mismo grupo y jerarquía Soon
         const filtered = data.filter(
-          u => u.group === loggedUser.group && u.jerarquia === "Soon"
+          (u) => u.group === loggedUser.group && u.jerarquia === "Soon"
         );
         setGroupUsers(filtered);
       } catch (error) {
@@ -50,7 +46,7 @@ console.log("Usuarios:", data);
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
-    if (!title || !description || !assignedTo || !dueDate) {
+    if (!title || !description || !assignedTo || !dueDate || !status) {
       alert("Por favor completa todos los campos");
       return;
     }
@@ -64,9 +60,10 @@ console.log("Usuarios:", data);
           description,
           assignedTo,
           assignedFrom: loggedUser?.userName,
+           group: loggedUser?.group,
           assignedAt: new Date(),
           dueDate,
-          status: "In Progress",
+          status: status.toLowerCase(),
         }),
       });
 
@@ -120,7 +117,7 @@ console.log("Usuarios:", data);
               onChange={(e) => setAssignedTo(e.target.value)}
             >
               <option value="">-- Selecciona un usuario --</option>
-              {groupUsers.map(u => (
+              {groupUsers.map((u) => (
                 <option key={u.id} value={u.userName}>
                   {u.nombre} {u.apellido} {u.group}
                 </option>
@@ -137,10 +134,32 @@ console.log("Usuarios:", data);
             />
           </div>
 
-          <button type="submit" className="submit-btn">
-            Crear Tarea
-          </button>
+          {/* 👇 Nuevo campo para elegir el estado */}
+          <div className="form-group">
+            <label>Estado</label>
+            <select value={status} onChange={(e) => setStatus(e.target.value)}>
+              <option value="pending">Pending</option>
+<option value="urgent">Urgent</option>
+
+            </select>
+          </div>
+
+          <div className="button-group">
+            <button type="submit" className="submit-btn">
+              Crear Tarea
+            </button>
+          </div>
         </form>
+
+        <div className="button-group">
+          <button
+            className="return-btn"
+            onClick={() => navigate("/pages/TaskShow")}
+            type="button"
+          >
+            Cancel Task
+          </button>
+        </div>
       </div>
     </div>
   );

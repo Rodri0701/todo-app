@@ -41,5 +41,16 @@
     "userName": "RoySon",
     "jerarquia": "Soon",
     "group": "TI"
+  },
+  {
+    "id": 1757999924328,
+    "nombre": "Palos",
+    "apellido": "Perez",
+    "edad": "30",
+    "email": "per@gmail.com",
+    "password": "12345",
+    "userName": "Pz",
+    "jerarquia": "Soon",
+    "group": "TI"
   }
 ]

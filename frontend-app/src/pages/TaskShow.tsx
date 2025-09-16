@@ -3,17 +3,33 @@ import "./TaskShow.css";
 import { useNavigate } from "react-router-dom";
 import Tasks from "../components/Tasks.tsx"; // Tareas completadas
 import PendingTasks from "../components/PendingTasks.tsx"; // Tareas pendientes
-
-
+import { useAppContext } from "../components/AppContext.tsx";
 
 interface Task {
   id: number;
   title: string;
   description: string;
   assignedTo: string;
+  assignedFrom?: string;
+  group?: string;
   dueDate: string;
   status: string;
 }
+
+// Helper para mostrar el texto de status bonito
+const getStatusLabel = (status: string) => {
+  const s = status.toLowerCase();
+  switch (s) {
+    case "pending":
+      return "pending ⏳";
+    case "urgent":
+      return "urgent ⚡";
+    case "in progress":
+      return "in progress 🔧";
+    default:
+      return status.charAt(0).toUpperCase() + status.slice(1);
+  }
+};
 
 const TaskShow: React.FC = () => {
   const navigate = useNavigate();
@@ -22,14 +38,68 @@ const TaskShow: React.FC = () => {
   const [error, setError] = useState<string>("");
   const [view, setView] = useState<"main" | "pending" | "completed">("main");
 
+  const { setLoggedUser } = useAppContext();
+
   // Datos del usuario logueado
   const tagName = localStorage.getItem("tagName") || "Usuario";
   const jerarquia = localStorage.getItem("jerarquia") || "User";
+  const userName = localStorage.getItem("userName") || "";
+  const group = localStorage.getItem("group") || "";
 
   const handleGoHome = () => {
-    localStorage.clear(); // Limpiamos sesión
+    localStorage.clear();
+    setLoggedUser(null);
     navigate("/");
   };
+
+  // Función para eliminar tarea
+  const handleDeleteTask = async (taskId: number) => {
+    const confirmDelete = window.confirm("¿Estás seguro de eliminar esta tarea?");
+    if (!confirmDelete) return;
+
+    try {
+      const response = await fetch(`http://localhost:5000/tasks/${taskId}`, {
+        method: "DELETE",
+      });
+      const data = await response.json();
+      console.log(data.message);
+
+      // Actualizamos el estado eliminando la tarea
+      setTasks((prev: Task[]) => prev.filter((task: Task) => task.id !== taskId));
+    } catch (error) {
+      console.error("Error al eliminar la tarea:", error);
+      alert("No se pudo eliminar la tarea.");
+    }
+  };
+ //Funcion para actualizar la tarea
+
+const handleMarkAsCompleted = async (taskId: number) => {
+  const confirmUpdate = window.confirm("¿Marcar esta tarea como completada?");
+  if (!confirmUpdate) return;
+
+  try {
+    const response = await fetch(`http://localhost:5000/tasks/${taskId}`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ status: "completed" }),
+    });
+
+    const data = await response.json();
+    console.log(data.message);
+
+    // Actualizamos el estado local para reflejar el cambio
+    setTasks((prev: Task[]) =>
+      prev.map((task: Task) =>
+        task.id === taskId ? { ...task, status: "completed" } : task
+      )
+    );
+  } catch (error) {
+    console.error("Error al actualizar la tarea:", error);
+    alert("No se pudo actualizar la tarea.");
+  }
+};
 
   useEffect(() => {
     const fetchTasks = async () => {
@@ -37,20 +107,38 @@ const TaskShow: React.FC = () => {
         const response = await fetch("http://localhost:5000/tasks");
         if (!response.ok) throw new Error("Error al obtener tareas");
         const data: Task[] = await response.json();
-        setTasks(data);
+
+        const role = jerarquia.trim().toLowerCase();
+        const filtered: Task[] = data.filter((task) => {
+          if (!task.group) return false;
+
+          const validStatus = ["urgent", "in progress"].includes(task.status.toLowerCase());
+          if (!validStatus) return false;
+
+          if (role === "soon") return task.assignedTo === userName && task.group === group;
+          if (role === "boss") return task.group === group;
+
+          return false;
+        });
+
+        console.log(`Tareas filtradas (${role}):`, filtered.length);
+        if (filtered.length === 0)
+          console.log(`No se encontraron tareas para userName: ${userName}, group: ${group}`);
+
+        setTasks(filtered);
       } catch (err: any) {
         setError(err.message);
       } finally {
         setLoading(false);
       }
     };
+
     fetchTasks();
-  }, []);
+  }, [jerarquia, userName, group]);
 
-  if (loading) return <p>Cargando tareas...</p>;
-  if (error) return <p>Error: {error}</p>;
+  if (loading) return <div className="page-wrapper"><p className="loading-message">Cargando tareas...</p></div>;
+  if (error) return <div className="page-wrapper"><p className="error-message">Error: {error}</p></div>;
 
-  // Determina la clase de animación según la vista
   const containerClass = () => {
     if (view === "completed") return "task-show-container slide-left";
     if (view === "pending") return "task-show-container slide-right";
@@ -65,21 +153,18 @@ const TaskShow: React.FC = () => {
           <div className="container">
             <div className="card">
               <h1 className="title">
-                <span className="icon">📋</span> Todas las Tareas del momento
+                <span className="icon">📋</span> Tareas Actuales
               </h1>
 
-              <ul className="task-list">
-                {tasks
-                  .filter((task) => task.status === "In Progress" || task.status === "Urgent")
-                  .map((task) => (
+              {tasks.length === 0 ? (
+                <p className="no-tasks-message">No hay tareas urgentes o en progreso disponibles.</p>
+              ) : (
+                <ul className="task-list">
+                  {tasks.map((task) => (
                     <li
                       key={task.id}
                       className={`task-item ${
-                        task.status === "In Progress"
-                          ? "in-progress"
-                          : task.status === "Urgent"
-                          ? "urgent"
-                          : ""
+                        task.status.toLowerCase() === "in progress" ? "in-progress" : "urgent"
                       }`}
                     >
                       <h3 className="task-title">{task.title}</h3>
@@ -88,29 +173,42 @@ const TaskShow: React.FC = () => {
                         <strong>Asignado a:</strong> {task.assignedTo}
                       </p>
                       <p>
+                        <strong>Grupo:</strong> {task.group || "Sin grupo"}
+                      </p>
+                      <p>
                         <strong>Fecha límite:</strong> {task.dueDate}
                       </p>
                       <p>
-                        <strong>Status:</strong> {task.status}
+                        <strong>Estado:</strong> {getStatusLabel(task.status)}
                       </p>
                       <div className="task-buttons">
-                        <button className="delete-button">Delete</button>
-                        <button className="ready-button">Marcar como lista</button>
+                        {jerarquia.trim().toLowerCase() === "boss" && (
+                          <button
+                            className="delete-button"
+                            onClick={() => handleDeleteTask(task.id)}
+                          >
+                            Delete
+                          </button>
+                        )}
+                        <button className="ready-button"
+                        onClick={() => handleMarkAsCompleted(task.id)}>
+                          Marcar como lista</button>
                       </div>
                     </li>
                   ))}
-              </ul>
+                </ul>
+              )}
 
               <div className="bottom-buttons">
-  {jerarquia.trim().toLowerCase() === "boss" && (
-  <button className="add-button" onClick={() => navigate("/pages/NewTask")}>
-    <span className="icon">➕</span> Add New Task
-  </button>
-)}
-  <button className="return-button" onClick={handleGoHome}>
-    🏠 Log out ({tagName})
-  </button>
-</div>
+                {jerarquia.trim().toLowerCase() === "boss" && (
+                  <button className="add-button" onClick={() => navigate("/pages/NewTask")}>
+                    <span className="icon">➕</span> Nueva Tarea
+                  </button>
+                )}
+                <button className="return-button" onClick={handleGoHome}>
+                  🏠 Cerrar sesión ({tagName})
+                </button>
+              </div>
             </div>
           </div>
         )}

@@ -1,142 +1,198 @@
 /* Contenedor principal del formulario de nueva tarea */
 .new-task-form {
   display: flex;
-  flex-direction: column; /* Organiza título y formulario en columna */
-  gap: 24px; /* Espaciado amplio entre elementos */
-  padding: 32px; /* Padding generoso para un diseño espacioso */
-  background-color: #ffffff; /* Fondo blanco para claridad */
-  border: 1px solid #d1d5db; /* Borde gris claro */
-  border-radius: 12px; /* Bordes redondeados para modernidad */
-  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05); /* Sombra suave */
-  max-width: 800px; /* Ancho máximo para formularios amplios */
-  width: 100%; /* Aprovecha el ancho disponible */
-  margin: 24px auto; /* Centrado con margen vertical */
-  transition: transform 0.2s ease, box-shadow 0.2s ease; /* Transiciones suaves para hover */
+  flex-direction: column;
+  gap: 24px;
+  padding: 32px;
+  background-color: #ffffff;
+  border: 1px solid #d1d5db;
+  border-radius: 12px;
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+  max-width: 800px;
+  width: 100%;
+  margin: 24px auto;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
-/* Efecto hover para interacción visual */
 .new-task-form:hover {
-  transform: translateY(-4px); /* Eleva ligeramente el formulario */
-  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04); /* Sombra más pronunciada */
+  transform: translateY(-4px);
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
 }
 
-/* Estilo del título del formulario */
 .new-task-form h2 {
-  font-size: 2rem; /* Tamaño grande para destacar */
-  font-weight: 800; /* Negrita para énfasis */
-  color: #111827; /* Color oscuro para contraste */
-  margin: 0 0 24px 0; /* Espaciado inferior */
-  text-align: center; /* Centrado para simetría */
+  font-size: 2rem;
+  font-weight: 800;
+  color: #111827;
+  margin: 0 0 24px 0;
+  text-align: center;
 }
 
-/* Contenedor del formulario */
 .new-task-form form {
   display: flex;
-  flex-wrap: wrap; /* Permite disposición en varias filas si es necesario */
-  gap: 16px; /* Espaciado entre grupos de campos */
-  justify-content: space-between; /* Distribuye los campos horizontalmente */
+  flex-wrap: wrap;
+  gap: 16px;
+  justify-content: space-between;
 }
 
-/* Contenedor de cada grupo de campo (label + input/textarea) */
 .form-group {
   display: flex;
-  flex-direction: column; /* Organiza label e input en columna */
-  gap: 8px; /* Espaciado entre etiqueta e input */
-  flex: 1 1 48%; /* Cada grupo ocupa aproximadamente la mitad del ancho */
-  min-width: 200px; /* Ancho mínimo para evitar campos estrechos */
+  flex-direction: column;
+  gap: 8px;
+  flex: 1 1 48%;
+  min-width: 200px;
 }
 
-/* Estilo de las etiquetas de los campos */
 .form-group label {
-  font-weight: 600; /* Negrita para destacar */
-  color: #111827; /* Color oscuro para legibilidad */
-  font-size: 0.875rem; /* Tamaño de fuente pequeño pero legible */
+  font-weight: 600;
+  color: #111827;
+  font-size: 0.875rem;
 }
 
-/* Estilo de los inputs y textarea */
 .form-group input,
-.form-group textarea {
-  padding: 10px 12px; /* Espaciado interno cómodo */
-  border: 1px solid #d1d5db; /* Borde gris claro */
-  border-radius: 6px; /* Bordes redondeados */
-  font-size: 0.875rem; /* Tamaño de fuente consistente */
-  background-color: #f9fafb; /* Fondo gris claro */
-  transition: border-color 0.2s ease, box-shadow 0.2s ease; /* Transiciones suaves */
-  width: 100%; /* Ocupa todo el ancho del contenedor */
+.form-group textarea,
+.form-group select {
+  padding: 10px 12px;
+  border: 1px solid #d1d5db;
+  border-radius: 6px;
+  font-size: 0.875rem;
+  background-color: #f9fafb;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+  width: 100%;
+  box-sizing: border-box;
 }
 
-/* Estilo específico para textarea */
 .form-group textarea {
-  min-height: 100px; /* Altura mínima para textarea */
-  resize: vertical; /* Permite redimensionar solo verticalmente */
+  min-height: 100px;
+  resize: vertical;
 }
 
-/* Estilo al enfocar inputs y textarea */
+.form-group select {
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='%23111827' stroke-width='2'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' d='M19 9l-7 7-7-7'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 12px center;
+  background-size: 16px;
+}
+
 .form-group input:focus,
-.form-group textarea:focus {
-  outline: none; /* Elimina contorno predeterminado */
-  border-color: #3b82f6; /* Borde azul al enfocar */
-  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.2); /* Sombra suave para foco */
+.form-group textarea:focus,
+.form-group select:focus {
+  outline: none;
+  border-color: #3b82f6;
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.2);
 }
 
-/* Estilo para el botón de enviar */
+/* Estilos para campos con error */
+.form-group input.error,
+.form-group textarea.error,
+.form-group select.error {
+  border-color: #ef4444;
+  background-color: #fef2f2;
+}
+
+/* Mensaje de error */
+.error-message {
+  color: #ef4444;
+  font-size: 0.875rem;
+  text-align: center;
+  margin-bottom: 16px;
+}
+
+.button-group {
+  display: flex;
+  justify-content: center;
+  gap: 16px;
+  margin-top: 12px;
+}
+
+.new-task-form form .button-group {
+  margin-top: 16px;
+}
+
+.new-task-form > .button-group:last-child {
+  margin-top: 8px;
+}
+
+.submit-btn,
+.return-btn {
+  padding: 10px 12px;
+  border: none;
+  border-radius: 6px;
+  font-size: 0.875rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.2s ease, transform 0.2s ease;
+  flex: 1;
+  max-width: 200px;
+}
+
 .submit-btn {
-  margin-top: 16px; /* Espaciado superior */
-  width: 100%; /* Ocupa todo el ancho */
-  max-width: 200px; /* Limita el ancho del botón */
-  align-self: center; /* Centra el botón */
-  padding: 10px 12px; /* Espaciado interno */
-  background-color: #3b82f6; /* Fondo azul */
-  color: #ffffff; /* Texto blanco */
-  border: none; /* Sin borde */
-  border-radius: 6px; /* Bordes redondeados */
-  font-size: 0.875rem; /* Tamaño de fuente */
-  font-weight: 600; /* Negrita */
-  cursor: pointer; /* Cursor de interacción */
-  transition: background-color 0.2s ease; /* Transición suave */
+  background-color: #3b82f6;
+  color: #ffffff;
 }
 
-/* Efecto hover para el botón */
 .submit-btn:hover {
-  background-color: #2563eb; /* Azul más oscuro al pasar el ratón */
+  background-color: #2563eb;
+  transform: translateY(-2px);
 }
 
-/* Ajustes para pantallas medianas */
+.submit-btn:disabled {
+  background-color: #93c5fd;
+  cursor: not-allowed;
+  opacity: 0.7;
+}
+
+.return-btn {
+  background-color: #6b7280;
+  color: #ffffff;
+}
+
+.return-btn:hover {
+  background-color: #4b5563;
+  transform: translateY(-2px);
+}
+
 @media (max-width: 768px) {
   .new-task-form {
-    padding: 20px; /* Menor padding */
-    max-width: 100%; /* Ocupa todo el ancho */
-    margin: 16px auto; /* Margen más pequeño */
-    border-radius: 8px; /* Bordes más pequeños */
+    padding: 20px;
+    max-width: 100%;
+    margin: 16px auto;
+    border-radius: 8px;
   }
 
   .new-task-form h2 {
-    font-size: 1.75rem; /* Título reducido */
+    font-size: 1.75rem;
   }
 
   .form-group {
-    flex: 1 1 100%; /* Campos ocupan todo el ancho */
-    min-width: 0; /* Evita desbordamiento */
+    flex: 1 1 100%;
+    min-width: 0;
   }
 
   .form-group input,
-  .form-group textarea {
-    font-size: 0.875rem; /* Tamaño de fuente legible */
-    padding: 8px 10px; /* Menor padding */
+  .form-group textarea,
+  .form-group select {
+    font-size: 0.875rem;
+    padding: 8px 10px;
   }
 
-  .submit-btn {
-    max-width: 100%; /* Botón ocupa todo el ancho */
+  .button-group {
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .submit-btn,
+  .return-btn {
+    max-width: 100%;
   }
 }
 
-/* Ajustes para pantallas muy pequeñas */
 @media (max-width: 480px) {
   .new-task-form {
-    padding: 16px; /* Padding reducido */
+    padding: 16px;
   }
 
   .new-task-form h2 {
-    font-size: 1.5rem; /* Título más pequeño */
+    font-size: 1.5rem;
   }
 }

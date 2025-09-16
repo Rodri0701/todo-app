@@ -7,6 +7,7 @@ interface Task {
   title: string;
   description: string;
   assignedTo: string;
+  group?: string;
   dueDate: string;
   status: string;
 }
@@ -16,6 +17,11 @@ const Tasks: React.FC = () => {
   const [tasks, setTasks] = useState<Task[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string>("");
+
+  // Datos del usuario logueado
+  const jerarquia = localStorage.getItem("jerarquia") || "User";
+  const userName = localStorage.getItem("userName") || "";
+  const group = localStorage.getItem("group") || "";
 
   const handleGoHome = () => {
     navigate("/");
@@ -29,8 +35,23 @@ const Tasks: React.FC = () => {
           throw new Error("Error al obtener tareas");
         }
         const data: Task[] = await response.json();
-        // Filtramos solo las tareas completadas
-        const completedTasks = data.filter(task => task.status === "Completed");
+
+        // Filtramos solo tareas completadas y según jerarquía, grupo y usuario
+        const completedTasks = data.filter((task) => {
+          const isCompleted = task.status.toLowerCase() === "completed";
+          const matchesUser = task.assignedTo === userName;
+          const matchesGroup = task.group === group;
+
+          const role = jerarquia.trim().toLowerCase();
+          if (role === "soon") {
+            return isCompleted && matchesUser && matchesGroup;
+          } else if (role === "boss") {
+            return isCompleted && matchesGroup;
+          } else {
+            return false; // otros roles no ven tareas
+          }
+        });
+
         setTasks(completedTasks);
       } catch (err: any) {
         setError(err.message);
@@ -40,7 +61,7 @@ const Tasks: React.FC = () => {
     };
 
     fetchTasks();
-  }, []);
+  }, [jerarquia, userName, group]);
 
   if (loading) return <p>Cargando tareas completadas...</p>;
   if (error) return <p>Error: {error}</p>;
@@ -56,12 +77,15 @@ const Tasks: React.FC = () => {
           <p>No hay tareas completadas aún.</p>
         ) : (
           <ul className="task-list">
-            {tasks.map(task => (
+            {tasks.map((task) => (
               <li key={task.id} className="task-item completed">
                 <h3 className="task-title">{task.title}</h3>
                 <p>{task.description}</p>
                 <p>
                   <strong>Asignado a:</strong> {task.assignedTo}
+                </p>
+                <p>
+                  <strong>Grupo:</strong> {task.group || "Sin grupo"}
                 </p>
                 <p>
                   <strong>Fecha límite:</strong> {task.dueDate}
@@ -73,8 +97,6 @@ const Tasks: React.FC = () => {
             ))}
           </ul>
         )}
-
-        
       </div>
     </div>
   );

@@ -32,9 +32,13 @@ const LoginForm: React.FC<LoginFormProps> = ({ title }) => {
       if (res.ok) {
         console.log("Usuario autenticado:", data.usuario);
 
-        // Guardamos TagName y Jerarquía en localStorage
-        localStorage.setItem("tagName", data.usuario.userName);
-        localStorage.setItem("jerarquia", data.usuario.jerarquia);
+   
+          // Guardamos datos en localStorage
+  localStorage.setItem("tagName", data.usuario.userName);   // nombre visible
+  localStorage.setItem("jerarquia", data.usuario.jerarquia); // rol
+  localStorage.setItem("userName", data.usuario.userName);  // necesario para filtrar tareas
+  localStorage.setItem("group", data.usuario.group);        // necesario para filtrar tareas
+        
 
         // Guardamos el usuario completo en el contexto
         setLoggedUser(data.usuario);
